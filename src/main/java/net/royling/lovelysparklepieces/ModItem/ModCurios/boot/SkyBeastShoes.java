@@ -1,0 +1,51 @@
+package net.royling.lovelysparklepieces.ModItem.ModCurios.boot;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
+import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
+import top.theillusivec4.curios.api.SlotContext;
+
+import java.util.List;
+
+public class SkyBeastShoes extends UniversalCurio {
+    public SkyBeastShoes(Properties properties) {
+        super(properties.stacksTo(1).rarity(Rarity.EPIC));
+    }
+    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        Multimap<Holder<Attribute>,AttributeModifier> modifiers = HashMultimap.create();
+        modifiers.put(Attributes.JUMP_STRENGTH, new AttributeModifier(
+                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"beast_jump"),0.3, AttributeModifier.Operation.ADD_VALUE));
+        modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(
+                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"beast_movement_speed"),0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        return modifiers;
+    }
+
+    @Override
+    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        if(slotContext.entity() instanceof Player player){
+            return !ModCurios.hasCurio(player,this);
+        }
+        return true;
+    }
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level8"));
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.skybeast.basic").withColor(ColorUtil.getRainbow()));
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.skybeast.des2").withColor(ColorUtil.getRainbow()));
+        super.appendHoverText(stack,context,tooltipComponents,tooltipFlag);
+    }
+}

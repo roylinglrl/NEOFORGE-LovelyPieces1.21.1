@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/BladeBootItem.java"
+           title="刀片靴" extension="" presentableText="" tooltipTitle="" icon="" textColor="" backgroundColor=""/>
+     <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/CatBootItem.java"
+           title="猫猫鞋" extension="" presentableText="" tooltipTitle="" icon="XmlBrowsersCanary"
+           textColor="255,255,255"/>
+     <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/CrystalBootItem.java"
+           title="水晶靴"/>
+     <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/FoxBootItem.java"
+           title="狐狸靴"/>
+     <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/GuardBootItem.java"
+           title="守卫靴"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/RabbitBootItem.java"
+          title="兔兔靴"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/SteelPlateBootsItem.java"
+          title="山羊蹄子靴"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/GoatBootItem.java"
+          title="山羊蹄子靴"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/WarriorGreavesItem.java"
+          title="战士靴"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/DoubleJump.java" title="二段跳事件处理"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/GameClientEvents.java"
+          title="游戏客户端事件"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/ModClientEvents.java" title="mod客户端事件"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/OpenChest.java" title="打开末影箱发包"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/PlayerFps.java" title="玩家FPS和内存发包"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/PlayerSoul.java" title="玩家灵魂数量发包"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/SoulHUBRender.java" title="灵魂HUD渲染"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/datagenerator/BlockStateProvider.java"
+          title="方块状态提供"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/datagenerator/DataGenerators.java" title="data生成器"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/datagenerator/ModItemModelProvider.java"
+          title="物品模型生成器"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/datagenerator/ModRecipeProvider.java"
+          title="配方生成器"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/ModCurios.java"
+          title="所有饰品的注册类"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/FlowerBootItem.java"
+          title="鲜花鞋"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/LightRabbitFootItem.java"
+          title="轻灵兔兔脚"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/StrawSandalsItem.java"
+          title="草鞋"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/WaterwalkBootItem.java"
+          title="水上行走靴"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/necklace/MoonAmuletItem.java"
+          title="皎月护符"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/necklace/MagmaAmuletItem.java"
+          title="熔岩护符"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/curio/bandage.java"
+          title="绷带 免疫流血"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/Group/Gamblers/GamblersCorsageItem.java"
+          title="赌徒的胸花 body"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/Group/Gamblers/GamblersDiceItem.java"
+          title="赌徒的骰子"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/Group/Gamblers/GamblersEarringsItem.java"
+          title="赌徒的耳环"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/Group/Gamblers/GamblersPokerItem.java"
+          title="赌徒的扑克"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/Group/Gamblers/GamblersGoldCoinItem.java"
+          title="赌徒的金币"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/HUBRender.java" title="客户端HUD"/>
+   <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/PlayerChip.java" title="玩家筹码数量"/>
+   <tree path="/src/main/java/net/royling/lovelysparklepieces/ClientEvent/PlayerLavadef.java"
+         title="玩家熔岩护符计时发包"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/RollerSkatesItem.java"
+          title="溜冰鞋"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/JumpingFootwear.java"
+          title="猫猫鞋+山羊鞋=灵越鞋"/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/WindLeapBoots.java"
+          title="兔兔+狐狸=疾风鞋" extension="" presentableText="" tooltipTitle="" icon="" textColor=""
+          backgroundColor=""/>
+    <tree path="/src/main/java/net/royling/lovelysparklepieces/ModItem/ModCurios/boot/SkyBeastShoes.java"
+          title="终极兽靴"/>
+</trees>

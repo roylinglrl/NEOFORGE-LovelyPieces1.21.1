@@ -1,0 +1,73 @@
+package net.royling.lovelysparklepieces.ModBlock;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.royling.lovelysparklepieces.LovelySparklePieces;
+
+import java.util.function.Supplier;
+
+public class ModBlocks {
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
+            BuiltInRegistries.BLOCK,
+            LovelySparklePieces.MODID
+    );
+    public static final Supplier<Block> SOUL_LIGHT = BLOCKS.register(
+            "soul_light",()->new Block(BlockBehaviour.Properties.of()
+                    .destroyTime(0.05f).explosionResistance(0.05f).sound(SoundType.SAND)
+                    .lightLevel(state->15).noCollission().noOcclusion()){
+            private static final VoxelShape SOULIGHT_SHAPE = Shapes.box(
+                    0.375,0.375,0.375,0.625,0.625,0.625);
+                @Override
+                protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+                    return SOULIGHT_SHAPE;
+                }
+            }
+    );
+
+    public static final Supplier<Block> MOLTEN_STONE = BLOCKS.register("molten_stone",
+            () -> new MoltenStone(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)));
+
+    public static final Supplier<Block> MOLTEN_DIRT = BLOCKS.register("molten_dirt",
+            () -> new MoltenDirt(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)));
+
+    public static final Supplier<Block> SOLID_ICE = BLOCKS.register(
+            "solid_ice",
+            () -> new HardIce(Block.Properties.ofFullCopy(Blocks.ICE)
+                    .friction(0.6f) // 与普通方块相同的摩擦系数
+                    .hasPostProcess((bs, level, pos) -> true) // 保持冰的透明外观
+            )
+    );
+    public static final Supplier<Block> FLAT_ICE = BLOCKS.register(
+            "flat_ice",
+            () -> new FlatIce(Block.Properties.ofFullCopy(Blocks.ICE)
+                    .friction(0.6f) // 与普通方块相同的摩擦系数
+                    .hasPostProcess((bs, level, pos) -> true) // 保持冰的透明外观
+            )
+    );
+
+    public static final DeferredRegister<Item> BLOCK_ITEMS=DeferredRegister.create(
+            BuiltInRegistries.ITEM,LovelySparklePieces.MODID
+    );
+    public static final Supplier<Item> SOUL_LIGHT_ITEM = BLOCK_ITEMS.register(
+            "soul_light",()->new BlockItem(SOUL_LIGHT.get(),new Item.Properties())
+    );
+    public static final Supplier<Item> MOLTEN_STONE_ITEM = BLOCK_ITEMS.register(
+            "molten_stone",()->new BlockItem(MOLTEN_STONE.get(),new Item.Properties())
+    );
+    public static final Supplier<Item> MOLTEN_DIRT_ITEM = BLOCK_ITEMS.register(
+            "molten_dirt",()->new BlockItem(MOLTEN_DIRT.get(),new Item.Properties())
+    );
+
+}
