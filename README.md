@@ -1,25 +1,20 @@
+Lovely Sparkle Pieces 为 Minecraft 游戏添加了一系列独特的配件，旨在增强梦幻般的游戏体验
 
-Installation information
-=======
+主要内容：
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+大量可穿戴的奇珍异宝均围绕 curiosAPI 制作。
+从提升机动性的靴子到增强战斗力的戒指，各种精美的工具，以及强大的套装内容
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+设置效果：
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+该模块新增套装效果。
+当前版本仅有一个套装：赌徒。
+集齐3/5套套装后，即可获得额外效果。
+套装效果通常相互关联。
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+常见问题解答：
+问：我可以在模组包中使用这个模组吗？
+答：当然可以，只要不是商业用途！
+问：我发现了一个 bug/我有一个好主意？
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+答：请在评论区留言，或前往 GitHub 问题页面提交！
