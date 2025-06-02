@@ -55,6 +55,7 @@ public class TooltipEvent {
                                         Component.translatable(getStageTranslationKey(stage)))
                                 .withStyle(ChatFormatting.BLUE))
                 );
+
                 break;
             }
         }
