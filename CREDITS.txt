@@ -1,65 +1,30 @@
-Minecraft Forge: Credits/Thank You
+Lovely Sparkle Pieces 为 Minecraft 游戏添加了一系列独特的配件，旨在增强梦幻般的游戏体验
 
-Forge is a set of tools and modifications to the Minecraft base game code to assist 
-mod developers in creating new and exciting content. It has been in development for 
-several years now, but I would like to take this time thank a few people who have 
-helped it along it's way.
+主要内容：
 
-First, the people who originally created the Forge projects way back in Minecraft 
-alpha. Eloraam of RedPower, and SpaceToad of Buildcraft, without their acceptiance 
-of me taking over the project, who knows what Minecraft modding would be today.
+大量可穿戴的奇珍异宝均围绕 curiosAPI 制作。
 
-Secondly, someone who has worked with me, and developed some of the core features
-that allow modding to be as functional, and as simple as it is, cpw. For developing
-FML, which stabelized the client and server modding ecosystem. As well as the base
-loading system that allows us to modify Minecraft's code as elegently as possible.
+从提升机动性的靴子到增强战斗力的戒指，各种精美的工具，以及强大的套装内容
 
-Mezz, who has stepped up as the issue and pull request manager. Helping to keep me
-sane as well as guiding the community into creating better additions to Forge.
+设置效果：
 
-Searge, Bspks, Fesh0r, ProfMobious, and all the rest over on the MCP team {of which 
-I am a part}. For creating some of the core tools needed to make Minecraft modding 
-both possible, and as stable as can be.
-  On that note, here is some specific information of the MCP data we use:
-    * Minecraft Coder Pack (MCP) *
-      Forge Mod Loader and Minecraft Forge have permission to distribute and automatically 
-      download components of MCP and distribute MCP data files. This permission is not 
-      transitive and others wishing to redistribute the Minecraft Forge source independently
-      should seek permission of MCP or remove the MCP data files and request their users 
-      to download MCP separately.
-      
-And lastly, the countless community members who have spent time submitting bug reports, 
-pull requests, and just helping out the community in general. Thank you.
+该模块新增套装效果。 当前版本仅有一个套装：赌徒。
 
---LexManos
+集齐3/5套套装后，即可获得额外效果。
 
-=========================================================================
+套装效果通常相互关联。
 
-This is Forge Mod Loader.
+常见问题解答：
 
-You can find the source code at all times at https://github.com/MinecraftForge/MinecraftForge/tree/1.12.x/src/main/java/net/minecraftforge/fml
+问：我可以在模组包中使用这个模组吗？
 
-This minecraft mod is a clean open source implementation of a mod loader for minecraft servers
-and minecraft clients.
+答：当然可以，只要不是商业用途！
 
-The code is authored by cpw.
+问：我发现了一个 bug/我有一个好主意？
 
-It began by partially implementing an API defined by the client side ModLoader, authored by Risugami.
-http://www.minecraftforum.net/topic/75440-
-This support has been dropped as of Minecraft release 1.7, as Risugami no longer maintains ModLoader.
+答：请在评论区留言，或前往 GitHub 问题页面提交！
 
-It also contains suggestions and hints and generous helpings of code from LexManos, author of MinecraftForge.
-http://www.minecraftforge.net/
+下载地址：
+https://legacy.curseforge.com/minecraft/mc-mods/lovely-sparkle-pieces
 
-Additionally, it contains an implementation of topological sort based on that 
-published at http://keithschwarz.com/interesting/code/?dir=topological-sort
-
-It also contains code from the Maven project for performing versioned dependency
-resolution. http://maven.apache.org/
-
-It also contains a partial repackaging of the javaxdelta library from http://sourceforge.net/projects/javaxdelta/
-with credit to it's authors.
-
-Forge Mod Loader downloads components from the Minecraft Coder Pack
-(http://mcp.ocean-labs.de/index.php/Main_Page) with kind permission from the MCP team.
-
+1.20.1forge版本由 look 制作提供
