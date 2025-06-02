@@ -1,46 +1,30 @@
+Lovely Sparkle Pieces 为 Minecraft 游戏添加了一系列独特的配件，旨在增强梦幻般的游戏体验
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+主要内容：
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+大量可穿戴的奇珍异宝均围绕 curiosAPI 制作。
 
-Setup Process:
-==============================
+从提升机动性的靴子到增强战斗力的戒指，各种精美的工具，以及强大的套装内容
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+设置效果：
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `./gradlew genEclipseRuns`
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+该模块新增套装效果。 当前版本仅有一个套装：赌徒。
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `./gradlew genIntellijRuns`
-4. Refresh the Gradle Project in IDEA if required.
+集齐3/5套套装后，即可获得额外效果。
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-(this does not affect your code) and then start the process again.
+套装效果通常相互关联。
 
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+常见问题解答：
 
-Additional Resources: 
-=========================
-Community Documentation: https://docs.minecraftforge.net/en/1.20.1/gettingstarted/
-LexManos' Install Video: https://youtu.be/8VEdtQLuLO0
-Forge Forums: https://forums.minecraftforge.net/
-Forge Discord: https://discord.minecraftforge.net/
+问：我可以在模组包中使用这个模组吗？
+
+答：当然可以，只要不是商业用途！
+
+问：我发现了一个 bug/我有一个好主意？
+
+答：请在评论区留言，或前往 GitHub 问题页面提交！
+
+下载地址：
+https://legacy.curseforge.com/minecraft/mc-mods/lovely-sparkle-pieces
+
+1.20.1forge版本由 look 制作提供
