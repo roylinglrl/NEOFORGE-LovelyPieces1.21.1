@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "L": {
+      "item": "minecraft:lead"
+    },
+    "N": {
+      "item": "minecraft:stone"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    "PEP",
+    "LDL",
+    "PNP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:valorant"
+  }
+}

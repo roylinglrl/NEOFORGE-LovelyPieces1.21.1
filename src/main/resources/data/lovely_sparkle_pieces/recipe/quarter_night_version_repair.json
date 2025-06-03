@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:smithing_transform",
+  "base": {
+    "item": "lovely_sparkle_pieces:double_night_vision"
+  },
+  "addition": {
+    "item": "lovely_sparkle_pieces:battery"
+  },
+  "template": {
+    "item": "lovely_sparkle_pieces:battery"
+  },
+  "result": {
+    "id": "lovely_sparkle_pieces:double_night_vision",
+    "components": {
+      "minecraft:damage": 1
+    },
+    "count": 1
+  }
+}

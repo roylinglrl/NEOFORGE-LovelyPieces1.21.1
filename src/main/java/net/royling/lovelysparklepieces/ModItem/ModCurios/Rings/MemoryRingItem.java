@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -26,25 +27,17 @@ public class MemoryRingItem extends Item implements ICurioItem{
     }
     public float getMemory(Player player){
         double lsp_memory = player.getPersistentData().getDouble("lsp_memory");
-        if (lsp_memory <= 1.0) {
-            return 1.0f;
-        } else if (lsp_memory <= 6.0) {
-            return (float) (1.0 - (lsp_memory - 1.0) * 0.2);
-        } else if (lsp_memory <= 12.0) {
-            return (float) (-(lsp_memory - 6.0) / 6.0);
-        } else {
-            return -1.0f;
-        }
+        return calculateMemoryBonus(lsp_memory);
     }
     public float calculateMemoryBonus(double lsp_memory){
-        if (lsp_memory <= 1.0) {
-            return 1.0f;
-        } else if (lsp_memory <= 6.0) {
-            return (float) (1.0 - (lsp_memory - 1.0) * 0.2);
-        } else if (lsp_memory <= 12.0) {
-            return (float) (-(lsp_memory - 6.0) / 6.0);
+        // 内存越低伤害加成越高，内存越高伤害加成越低
+        if (lsp_memory <= 4.0) {
+            return 0.3f; // 4GB及以下：+30%
+        } else if (lsp_memory <= 16.0) {
+            // 4GB-16GB线性变化：从+30%到-30%
+            return (float) (0.3 - (lsp_memory - 4.0) * (0.6 / 12.0));
         } else {
-            return -1.0f;
+            return -0.3f; // 16GB以上：-30%
         }
     }
     public float curMem(){
@@ -57,18 +50,18 @@ public class MemoryRingItem extends Item implements ICurioItem{
         if(slotContext.entity()instanceof Player player) {
             if (player.level().isClientSide) return;
             AttributeModifier newModifier = new AttributeModifier(ATTID,
-                    getMemory(player), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-            Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).removeModifier(newModifier);
-            Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).addOrReplacePermanentModifier(newModifier);
+                    getMemory(player), AttributeModifier.Operation.ADD_VALUE);
+            Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).removeModifier(newModifier);
+            Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).addOrReplacePermanentModifier(newModifier);
         }
     }
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         if(slotContext.entity()instanceof Player player){
             long fps = player.getPersistentData().getLong("lsp_fpsvalue");
-            if(Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).getModifier(ATTID)==null){
-                Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).addOrReplacePermanentModifier(new AttributeModifier(
-                        ATTID,getMemory(player), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            if(Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).getModifier(ATTID)==null){
+                Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).addOrReplacePermanentModifier(new AttributeModifier(
+                        ATTID,getMemory(player), AttributeModifier.Operation.ADD_VALUE
                 ));
             }
         }
@@ -77,7 +70,7 @@ public class MemoryRingItem extends Item implements ICurioItem{
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         if(slotContext.entity()instanceof Player player){
-            Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).removeModifier(ATTID);
+            Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).removeModifier(ATTID);
         }
     }
 
@@ -105,4 +98,5 @@ public class MemoryRingItem extends Item implements ICurioItem{
         }
         return true;
     }
+
 }

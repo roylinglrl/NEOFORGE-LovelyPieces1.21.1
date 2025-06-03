@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "lovely_sparkle_pieces:item/witch_hat_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent":  "lovely_sparkle_pieces:item/witch_hat_2d"
+    },
+    "ground": {
+      "parent": "lovely_sparkle_pieces:item/witch_hat_3d"
+    }
+  }
+}

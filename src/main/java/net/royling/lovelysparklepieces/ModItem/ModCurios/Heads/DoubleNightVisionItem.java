@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -16,15 +17,17 @@ import java.util.List;
 
 public class DoubleNightVisionItem extends UniversalCurio {
     public DoubleNightVisionItem(Properties properties) {
-        super(properties.stacksTo(1));
+        super(properties.stacksTo(1).durability(3600));
     }
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         if(slotContext.entity().level().isClientSide)return;
         if(slotContext.entity().tickCount%20!=0)return;
-        slotContext.entity().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION,240,0,false,false));
-    }
+        if(stack.getMaxDamage()-stack.getDamageValue()>1) {
+            slotContext.entity().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 240, 0, false, false));
+            stack.hurtAndBreak(1,slotContext.entity(), EquipmentSlot.MAINHAND);
+        }}
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         if(slotContext.entity() instanceof Player player){
@@ -35,7 +38,7 @@ public class DoubleNightVisionItem extends UniversalCurio {
 
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        slotContext.entity().removeEffect(MobEffects.NIGHT_VISION);
+        //slotContext.entity().removeEffect(MobEffects.NIGHT_VISION);
     }
 
     @Override

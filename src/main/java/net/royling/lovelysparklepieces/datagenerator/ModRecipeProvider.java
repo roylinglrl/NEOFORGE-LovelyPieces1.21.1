@@ -5,11 +5,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModBlock.ModBlocks;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
 
@@ -539,14 +541,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("E  ")
                 .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.NECROPSYCHE_PAPILLON.get())
-                .define('S', Items.SOUL_SAND)
-                .define('F', Items.FEATHER)
-                .define('E', Items.ENDER_EYE)
-                .pattern("FS ")
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.NECROPSYCHE_PAPILLON.get())
+                .define('F', Items.PHANTOM_MEMBRANE)   // 幻影膜 (扇面/翅膀)
+                .define('E', Items.ENDER_PEARL)        // 末影珍珠 (追踪能力)
+                .define('S', Items.STICK)              // 木棍 (扇骨/手柄)
+                .define('C', Items.DIAMOND)              // 木棍 (扇骨/手柄)
+                .pattern("FCF")
                 .pattern(" E ")
-                .pattern("  S")
-                .unlockedBy("has_feather", has(Items.FEATHER))
+                .pattern(" S ")
+                .unlockedBy("has_phantom_membrane", has(Items.PHANTOM_MEMBRANE))
                 .save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.FIREBALL_STAFF.get())
                 .define('B', Items.BLAZE_ROD)
@@ -606,42 +609,217 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeOutput);
         // 头戴式夜视仪PVS-14
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.NIGHT_VISION.get())
-                .define('C', Items.COPPER_INGOT)        // 铜锭（支架结构）
-                .define('R', Items.COMPARATOR)          // 红石比较器（光电信号处理）
-                .define('G', Items.SPYGLASS)            // 望远镜（光学基础）
-                .define('L', Items.GLOWSTONE)           // 荧石（夜视光源）
-                .define('B', Items.BLACK_DYE)           // 黑色染料（遮光涂层）
-                .pattern("CLC")  // 第一行：铜锭 荧石 铜锭（光学组件）
-                .pattern("GRG")  // 第二行：望远镜 红石比较器 望远镜（核心模组）
-                .pattern("B B")  // 第三行：黑色染料 空 黑色染料（头带固定点）
+                .define('C', Items.COPPER_INGOT)
+                .define('R', Items.COMPARATOR)
+                .define('G', Items.SPYGLASS)
+                .define('L', Items.GLOWSTONE)
+                .define('B', Items.BLACK_DYE)
+                .pattern("CLC")
+                .pattern("GRG")
+                .pattern("B B")
                 .unlockedBy("has_comparator", has(Items.COMPARATOR))
                 .save(recipeOutput);
         // ATNPS15双筒夜视仪（强化版）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.DOUBLE_NIGHT_VISION.get())
-                .define('N', Items.GOLD_INGOT)    // 下界合金（军用级支架）
-                .define('P', Items.PHANTOM_MEMBRANE)   // 幻翼膜（轻量化蒙皮）
-                .define('V', Items.SPYGLASS)           // 望远镜×2（双筒光学模组）
-                .define('S', Items.SCULK_SENSOR)       // 幽匿感测体（增强型光电转换）
-                .define('G', Items.GLOWSTONE)          // 荧石×2（双通道夜视光源）
-                .define('L', Items.LIGHTNING_ROD)      // 避雷针（电源稳压装置）
-                .pattern("GVG")  // 荧石 望远镜 荧石
-                .pattern("SLS")  // 幽匿感测体 避雷针 幽匿感测体
-                .pattern("NPN")  // 下界合金 幻翼膜 下界合金
+                .define('N', Items.GOLD_INGOT)
+                .define('P', Items.PHANTOM_MEMBRANE)
+                .define('V', Items.SPYGLASS)
+                .define('S', Items.SCULK_SENSOR)
+                .define('G', Items.GLOWSTONE)
+                .define('L', Items.LIGHTNING_ROD)
+                .pattern("GVG")
+                .pattern("SLS")
+                .pattern("NPN")
                 .unlockedBy("has_sculk_sensor", has(Items.SCULK_SENSOR))
                 .save(recipeOutput);
         // 四筒全景夜视仪（顶级军用规格）
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.QUARTER_NIGHT_VISION.get())
-                .define('X', Items.NETHERITE_INGOT)       // 下界之星（高能核心）
-                .define('A', Items.AMETHYST_BLOCK)    // 紫水晶块×4（多光谱成像）
-                .define('C', Items.COPPER_BLOCK)      // 铜块×4（增强型信号传导）
-                .define('S', Items.SCULK_SENSOR)      // 幽匿感测体×4（全向感知阵列）
-                .define('P', Items.PHANTOM_MEMBRANE)  // 幻翼膜×2（战术级蒙皮）
-                .define('B', Items.SHULKER_SHELL)     // 潜影壳（抗干扰外壳）
-                .pattern("CAC")  // 铜块 紫水晶块 铜块（左光学组）
-                .pattern("SXS")  // 幽匿感测体 下界之星 幽匿感测体（中央处理器）
-                .pattern("BPB")  // 潜影壳 幻翼膜 潜影壳（右佩戴系统）
-                .unlockedBy("wither_killed", has(Items.NETHER_STAR)) // 需击败凋灵
+                .define('X', Items.NETHERITE_INGOT)
+                .define('A', Items.AMETHYST_BLOCK)
+                .define('C', Items.COPPER_BLOCK)
+                .define('S', Items.SCULK_SENSOR)
+                .define('P', Items.PHANTOM_MEMBRANE)
+                .define('B', Items.SHULKER_SHELL)
+                .pattern("CAC")
+                .pattern("SXS")
+                .pattern("BPB")
+                .unlockedBy("wither_killed", has(Items.NETHER_STAR))
                 .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.UFFFD.get())
+                .define('C', Items.CHAIN)
+                .define('O', Items.OBSIDIAN)
+                .define('E', Items.ENDER_PEARL)
+                .define('S', Items.SOUL_SAND)
+                .pattern(" C ")
+                .pattern("OEO")
+                .pattern(" S ")
+                .unlockedBy("has_ender_pearl", has(Items.ENDER_PEARL))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.POWER_AMULET.get())
+                .define('R', Items.REDSTONE_BLOCK)
+                .define('F', Items.FEATHER)
+                .define('G', Items.GOLD_BLOCK)
+                .define('P', Items.PISTON)
+                .pattern("F F")
+                .pattern("RPR")
+                .pattern("GGG")
+                .unlockedBy("has_redstone_block", has(Items.REDSTONE_BLOCK))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.MYSTERIOUS_GEL.get())
+                .define('S', Items.SLIME_BALL)
+                .define('U', Items.SUGAR)
+                .define('W', Items.WATER_BUCKET)
+                .define('A', Items.AMETHYST_SHARD)
+                .pattern("AWA")
+                .pattern("USU")
+                .pattern("AWA")
+                .unlockedBy("has_slime_ball", has(Items.SLIME_BALL))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModCurios.SLIME_EATER.get())
+                .define('G', ModCurios.MYSTERIOUS_GEL.get())
+                .define('S', Items.SLIME_BALL)
+                .define('U', Items.SUGAR)
+                .define('C', Items.GOLDEN_CARROT)
+                .define('B', Items.BOWL)
+                .pattern("SUS")
+                .pattern("GCG")
+                .pattern(" B ")
+                .unlockedBy("has_mysterious_gel", has(ModCurios.MYSTERIOUS_GEL.get()))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModCurios.GLUTTONY_AMULET.get())
+                .define('F', Items.COOKED_BEEF)
+                .define('S', Items.SUGAR)
+                .define('G', Items.GOLD_INGOT)
+                .pattern("FSF")
+                .pattern("SGS")
+                .pattern("FSF")
+                .unlockedBy("has_cooked_beef", has(Items.COOKED_BEEF))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModCurios.ERODED_FACE.get())
+                .define('D', Items.DIAMOND)
+                .define('G', Items.GHAST_TEAR)
+                .define('N', Items.NETHERITE_INGOT)
+                .define('S', Items.NETHER_STAR)
+                .pattern("DGD")
+                .pattern("DSD")
+                .pattern("DND")
+                .unlockedBy("has_nether_star", has(Items.NETHER_STAR))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModCurios.SOUL_MARK.get())
+                .define('S', Items.SOUL_SAND)
+                .define('C', Items.CRYING_OBSIDIAN)
+                .define('B', Items.NETHERITE_BLOCK)
+                .define('N', Items.NETHER_STAR)
+                .pattern("CSC")
+                .pattern("SBN")
+                .pattern("CSC")
+                .unlockedBy("has_nether_star", has(Items.NETHER_STAR))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModCurios.EMBER_CORE.get())
+                .define('C', Items.BLAZE_ROD)
+                .define('F', Items.FIRE_CHARGE)
+                .define('L', Items.LAVA_BUCKET)
+                .define('D', Items.MAGMA_BLOCK)
+                .pattern("FCF")
+                .pattern("LDL")
+                .pattern("FDF")
+                .unlockedBy("has_blaze_rod", has(Items.BLAZE_ROD))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModCurios.VALORANT.get())
+                .define('P', Items.PAPER)
+                .define('E', Items.ENDER_EYE)
+                .define('D', Items.DIAMOND_BLOCK)
+                .define('N', Items.STONE)
+                .define('L', Items.LEAD)
+                .pattern("PEP")
+                .pattern("LDL")
+                .pattern("PNP")
+                .unlockedBy("has_nether_star", has(Items.NETHER_STAR))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.DEMON_BREAKING_SILVER_HUNTER.get())
+                .define('D', Items.DIAMOND)
+                .define('B', Items.BLAZE_ROD)
+                .define('G', Items.GLOWSTONE_DUST)
+                .define('I', Items.IRON_INGOT)
+                .define('E', Items.FLINT)
+                .pattern(" BD")
+                .pattern("EGE")
+                .pattern(" I ")
+                .unlockedBy("has_diamond", has(Items.DIAMOND))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.MINIGUN.get())
+                .define('I', Items.IRON_INGOT)
+                .define('B', Items.IRON_BLOCK)
+                .define('R', Items.REDSTONE)
+                .define('L', Items.LEVER)
+                .pattern("I I")
+                .pattern("RBL")
+                .pattern("I I")
+                .unlockedBy("has_iron_block", has(Items.IRON_BLOCK))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.HKMP7.get())
+                .define('N', Items.NETHERITE_INGOT)
+                .define('R', Items.REDSTONE_BLOCK)
+                .define('D', Items.DIAMOND)
+                .define('G', Items.GOLD_INGOT)
+                .define('M', ModItems.MINIGUN.get())
+                .pattern("NNN")
+                .pattern("RDR")
+                .pattern("GMG")
+                .unlockedBy("has_netherite_ingot", has(Items.NETHERITE_INGOT))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, ModItems.INFINITE_APPLE.get())
+                .define('A', Items.APPLE)
+                .define('G', Items.REDSTONE)
+                .define('L', Items.LAPIS_LAZULI)
+                .pattern("ALA")
+                .pattern("GAG")
+                .pattern("ALA")
+                .unlockedBy("has_golden_apple", has(Items.GOLDEN_APPLE))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, new ItemStack(ModItems.FLINTLOCK_BULLET.get(), 30))
+                .define('I', Items.IRON_NUGGET)
+                .define('P', Items.GUNPOWDER)
+                .define('A', Items.PAPER)
+                .pattern(" I ")
+                .pattern("PAP")
+                .pattern(" P ")
+                .unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.MULTI_PURPOSE_TOOL.get())
+                .define('N', Items.IRON_NUGGET)
+                .define('C', Items.COMPARATOR)
+                .define('R', Items.REDSTONE)
+                .define('D', Items.DIAMOND)
+                .define('I', Items.IRON_INGOT)
+                .pattern("NCN")
+                .pattern("RDR")
+                .pattern("NIN")
+                .unlockedBy("has_comparator", has(Items.COMPARATOR))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLAST_ABSORBER.get())
+                .define('O', Items.OBSIDIAN)
+                .define('C', Items.COPPER_BLOCK)
+                .define('L', Items.LIGHTNING_ROD)
+                .define('M', ModItems.MULTI_PURPOSE_TOOL.get())
+                .define('R', Items.REDSTONE_BLOCK)
+                .pattern("OCO")
+                .pattern("LML")
+                .pattern("ORO")
+                .unlockedBy("has_leitman_multi_tool", has(ModItems.MULTI_PURPOSE_TOOL.get()))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CURIO_WORKBENCH.get())
+                .define('D', Items.GOLD_INGOT)
+                .define('R', Items.REDSTONE_BLOCK)
+                .define('M', ModItems.MULTI_PURPOSE_TOOL.get())
+                .define('T', Items.CRAFTING_TABLE)
+                .pattern("DRD")
+                .pattern("RMR")
+                .pattern(" T ")
+                .unlockedBy("has_leitman_multi_tool", has(ModItems.MULTI_PURPOSE_TOOL.get()))
+                .save(recipeOutput);
+
+
 
 
         super.buildRecipes(recipeOutput);

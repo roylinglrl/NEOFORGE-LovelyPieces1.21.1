@@ -15,6 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
+import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import top.theillusivec4.curios.api.SlotContext;
@@ -29,9 +30,11 @@ public class CritRingItem extends UniversalCurio {
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        Double CRIT_CHANCE = LSPConfig.CRIT_RING.get();
+
         Multimap<Holder<Attribute>,AttributeModifier> modifiers = HashMultimap.create();
         modifiers.put(ModAttribute.CRIT_CHANCE, new AttributeModifier(
-                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"crit_ring"),0.08, AttributeModifier.Operation.ADD_VALUE));
+                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"crit_ring"),CRIT_CHANCE, AttributeModifier.Operation.ADD_VALUE));
         return modifiers;
     }
     @Override

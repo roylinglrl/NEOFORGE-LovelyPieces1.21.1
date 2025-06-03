@@ -11,7 +11,7 @@ import net.royling.lovelysparklepieces.LovelySparklePieces;
 
 public record PlayerLavadef(int lavadefCount) implements CustomPacketPayload {
     public PlayerLavadef {
-        if(lavadefCount< 0) throw new IllegalArgumentException("Invalid soulCount value");
+        if(lavadefCount< 0) throw new IllegalArgumentException("Invalid lavadef value");
     }
     public static final Type<PlayerLavadef> TYPE =
             new Type<>(

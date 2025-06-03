@@ -3,8 +3,10 @@ package net.royling.lovelysparklepieces.ModItem.ModCurios;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.Group.Gamblers.*;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.Heads.*;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.Legendary.*;
@@ -14,18 +16,19 @@ import net.royling.lovelysparklepieces.ModItem.ModCurios.back.MermaidTail;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.back.WoodGrainQuiver;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.belt.AdventurersBelt;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.belt.GoldedHook;
+import net.royling.lovelysparklepieces.ModItem.ModCurios.belt.HighQualityFishingLineItem;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.body.*;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.boot.*;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.bracelet.ResuscitatorItem;
-import net.royling.lovelysparklepieces.ModItem.ModCurios.necklace.BlazeCoreItem;
-import net.royling.lovelysparklepieces.ModItem.ModCurios.necklace.MagmaAmuletItem;
-import net.royling.lovelysparklepieces.ModItem.ModCurios.necklace.MoonAmuletItem;
+import net.royling.lovelysparklepieces.ModItem.ModCurios.charm.*;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.Supplier;
 
 public class ModCurios {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, LovelySparklePieces.MODID);
+    public static final DeferredRegister<Item> STRANGE_ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, LovelySparklePieces.MODID);
+
     //RING
     public static final Supplier<Item> MAGNETIC_RING = ITEMS.register("magnetic_ring",
             ()->new MagneticRingItem(new Item.Properties()));
@@ -35,9 +38,9 @@ public class ModCurios {
             ()->new EnderRingItem(new Item.Properties()));
     public static final Supplier<Item> CRIT_RING = ITEMS.register("crit_ring",
             ()->new CritRingItem(new Item.Properties()));
-    public static final Supplier<Item> MEMORY_RING = ITEMS.register("memory_ring",
+    public static final Supplier<Item> MEMORY_RING = STRANGE_ITEMS.register("memory_ring",
             ()->new MemoryRingItem(new Item.Properties()));
-    public static final Supplier<Item> NIGHT_OWL_RING = ITEMS.register("night_owl_ring",
+    public static final Supplier<Item> NIGHT_OWL_RING = STRANGE_ITEMS.register("night_owl_ring",
             ()->new NightOwlRingItem(new Item.Properties()));
     public static final Supplier<Item> CRUSH_STONE_RING = ITEMS.register("crush_stone_ring",
             ()->new CrushedStoneRingItem(new Item.Properties()));
@@ -46,9 +49,8 @@ public class ModCurios {
     public static final Supplier<Item> ECO_RING = ITEMS.register("eco_ring",
             ()->new EcoRingItem(new Item.Properties()));
 
-
     //head
-    public static final Supplier<Item> FPS_EYE = ITEMS.register("fps_eye",
+    public static final Supplier<Item> FPS_EYE = STRANGE_ITEMS.register("fps_eye",
             ()->new FPSEyeItem(new Item.Properties()));
     public static final Supplier<Item> BLACKSTONE_HEART = ITEMS.register("blackstone_heart",
             ()->new BlackstoneHeart(new Item.Properties()));
@@ -80,6 +82,14 @@ public class ModCurios {
             ()->new MoonAmuletItem(new Item.Properties()));
     public static final Supplier<Item> BLAZE_CORE = ITEMS.register("blaze_core",
             ()->new BlazeCoreItem(new Item.Properties()));
+    public static final Supplier<Item> POWER_AMULET = ITEMS.register("power_amulet",
+            ()->new PowerAmulet(new Item.Properties()));
+    public static final Supplier<Item> SLIME_EATER = ITEMS.register("slime_eater",
+            ()->new SlimeEaterCurio(new Item.Properties()));
+    public static final Supplier<Item> MYSTERIOUS_GEL = ITEMS.register("mysterious_gel",
+            ()->new MysteriousGel(new Item.Properties()));
+    public static final Supplier<Item> GLUTTONY_AMULET = ITEMS.register("gluttony_amulet",
+            ()->new GluttonyAmulet(new Item.Properties()));
 
     //bracelet
     public static final Supplier<Item> RESUSCITATOR = ITEMS.register("resuscitator",
@@ -99,6 +109,8 @@ public class ModCurios {
             ()->new HighQualityFishingLineItem(new Item.Properties()));
     public static final Supplier<Item> PDA = ITEMS.register("pda",
             ()->new PDAItem(new Item.Properties()));
+    public static final Supplier<Item> UFFFD = ITEMS.register("ufffd",
+            ()->new ufffdItem(new Item.Properties()));
 
     //BACK
     public static final Supplier<Item> MERMAID_TAIL = ITEMS.register("mermaid_tail",
@@ -145,7 +157,7 @@ public class ModCurios {
             ()->new WindLeapBoots(new Item.Properties()));
     public static final Supplier<Item> SKY_BEAST_SHOES = ITEMS.register("sky_beast_shoes",
             ()->new SkyBeastShoes(new Item.Properties()));
-    //lc
+    //傳奇飾品
     public static final Supplier<Item> BLASPHEMOUS_CONTRACT = ITEMS.register("blasphemous_contract",
             ()->new BlasphemousContract(new Item.Properties()));
     public static final Supplier<Item> MIRROR_AND_WATER = ITEMS.register("mirror_and_water",
@@ -158,6 +170,15 @@ public class ModCurios {
             () -> new NewbieUmbrella(new Item.Properties()));
     public static final Supplier<Item> DRAGON_HEART = ITEMS.register("dragon_heart",
             () -> new DragonHeartItem(new Item.Properties()));
+    public static final Supplier<Item> ERODED_FACE = ITEMS.register("eroded_face",
+            () -> new ErodedFaceItem(new Item.Properties()));
+    public static final Supplier<Item> SOUL_MARK = ITEMS.register("soul_mark",
+            () -> new SoulMarkItem(new Item.Properties()));
+    public static final Supplier<Item> EMBER_CORE = ITEMS.register("ember_core",
+            () -> new EmberCoreItem(new Item.Properties()));
+    public static final Supplier<Item> VALORANT = ITEMS.register("valorant",
+            () -> new Valorant(new Item.Properties()));
+
     //赌徒的套装
     public static final Supplier<Item> GAMBLERS_CORSAGE = ITEMS.register("gamblers_corsage",
             () -> new GamblersCorsageItem(new Item.Properties()));

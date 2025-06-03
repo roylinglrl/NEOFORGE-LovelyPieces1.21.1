@@ -16,6 +16,9 @@ public class BlockStateGene extends BlockStateProvider {
     protected void registerStatesAndModels() {
         getVariantBuilder(ModBlocks.SOUL_LIGHT.get())
                 .partialState().setModels(new ConfiguredModel(models().getExistingFile(modLoc("block/soul_light"))));
+        getVariantBuilder(ModBlocks.BLAST_ABSORBER.get())
+                .partialState().setModels(new ConfiguredModel(models().getExistingFile(modLoc("block/blast_absorber"))));
+
         simpleBlock(ModBlocks.FLAT_ICE.get(),cubeAll(ModBlocks.FLAT_ICE.get()));
         simpleBlockItem(ModBlocks.FLAT_ICE.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/flat_ice")));
         simpleBlock(ModBlocks.SOLID_ICE.get(),cubeAll(ModBlocks.SOLID_ICE.get()));
@@ -24,5 +27,8 @@ public class BlockStateGene extends BlockStateProvider {
         simpleBlockItem(ModBlocks.MOLTEN_DIRT.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/molten_dirt")));
         simpleBlock(ModBlocks.MOLTEN_STONE.get(),cubeAll(ModBlocks.MOLTEN_STONE.get()));
         simpleBlockItem(ModBlocks.MOLTEN_STONE.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/molten_stone")));
+        simpleBlock(ModBlocks.CURIO_WORKBENCH.get(),cubeAll(ModBlocks.CURIO_WORKBENCH.get()));
+        simpleBlockItem(ModBlocks.CURIO_WORKBENCH.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/curio_workbench")));
+
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
+import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -39,16 +40,32 @@ public class CapitalistHeat extends UniversalCurio {
                             x + RADIUS, y + RADIUS, z + RADIUS)
             );
             for (IronGolem golem : golems) {
-                // 直接扣除生命值
-                float newHealth = golem.getHealth() - 25.0f;
-
-                if (newHealth > 0) {
-                    golem.setHealth(newHealth); // 不会触发死亡
-                } else {
-                    golem.setHealth(0); // 直接死亡
-                    golem.die(level.damageSources().generic());
+                // 创建无来源的魔法伤害
+                DamageSource magicDamage = golem.damageSources().magic();
+                // 施加足以致死的伤害（当前生命值 + 1确保致死）
+                golem.hurt(magicDamage, 25f);
+                // 检查是否因这次伤害死亡
+                if (golem.isDeadOrDying()) {
+                    // 确保只在服务端生成掉落物
+                    if (!golem.level().isClientSide()) {
+                        // 创建蛋糕掉落物
+                        ItemEntity cakeDrop = new ItemEntity(
+                                golem.level(),
+                                golem.getX(),
+                                golem.getY(),
+                                golem.getZ(),
+                                new ItemStack(ModItems.CAPITALIST_CAKE.get())
+                        );
+                        // 添加轻微弹跳效果
+                        cakeDrop.setDeltaMovement(
+                                (golem.getRandom().nextDouble() - 0.5) * 0.1,
+                                0.2,
+                                (golem.getRandom().nextDouble() - 0.5) * 0.1
+                        );
+                        // 将掉落物加入世界
+                        golem.level().addFreshEntity(cakeDrop);
+                    }
                 }
-
                 // 强制掉落铁锭（每次必掉）
                 level.addFreshEntity(new ItemEntity(
                         level,

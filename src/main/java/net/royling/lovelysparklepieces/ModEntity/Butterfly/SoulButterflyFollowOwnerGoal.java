@@ -18,7 +18,7 @@ public class SoulButterflyFollowOwnerGoal extends Goal {
     }
     @Override
     public boolean canUse() {
-        return butterfly.getOwner() != null;
+        return butterfly.getOwner() != null&&butterfly.getTarget() == null;
     }
     @Override
     public boolean canContinueToUse() {
@@ -26,6 +26,9 @@ public class SoulButterflyFollowOwnerGoal extends Goal {
     }
     @Override
     public void tick() {
+        if (butterfly.getTarget() != null) {
+            return;
+        }
         LivingEntity owner = butterfly.getOwner();
         if (owner == null) return;
         double distanceSq = butterfly.distanceToSqr(owner);
@@ -44,7 +47,7 @@ public class SoulButterflyFollowOwnerGoal extends Goal {
         // === 动态计算目标位置 ===
         double radius = 3.0;
         double verticalOffset = 1.5 + Math.sin(butterfly.tickCount * 0.2); // 增大垂直波动
-        currentAngle += 6.0; // 更快的角度变化
+        currentAngle += 6.0;
         double radian = Math.toRadians(currentAngle % 360);
         Vec3 targetPos = owner.position().add(
                 Math.cos(radian) * radius,
@@ -57,7 +60,7 @@ public class SoulButterflyFollowOwnerGoal extends Goal {
                 targetPos.x,
                 targetPos.y,
                 targetPos.z,
-                speed * 2 // 导航系统用更高速度
+                speed * 2
         );
 
         // === 直接施加运动力 ===

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import top.theillusivec4.curios.api.SlotContext;
@@ -26,7 +27,7 @@ public class FPSEyeItem extends UniversalCurio {
         super(properties.stacksTo(1));
     }
     public static double calculateDamageModifier(int fps) {
-        if (fps <= 20) {return 0.5;} else if (fps < 120) {return 0.5 * (1 - (fps - 20) / 100.0);} else if (fps < 220) {return -0.5 * ((fps - 120) / 100.0);} else {return -0.5;}
+        if (fps <= 20) {return 0.25;} else if (fps < 120) {return 0.25 * (1 - (fps - 20) / 100.0);} else if (fps < 220) {return -0.25 * ((fps - 120) / 100.0);} else {return -0.25;}
     }
     ResourceLocation ATTID = ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"fps_eye");
     @Override
@@ -35,9 +36,8 @@ public class FPSEyeItem extends UniversalCurio {
             if (player.level().isClientSide) return;
             long fps = player.getPersistentData().getLong("lsp_fpsvalue");
             AttributeModifier newModifier = new AttributeModifier(ATTID,
-                    calculateDamageModifier((int) fps), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-            Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).removeModifier(newModifier);
-            Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).addOrReplacePermanentModifier(newModifier);
+                    calculateDamageModifier((int) fps), AttributeModifier.Operation.ADD_VALUE);
+            Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).addOrReplacePermanentModifier(newModifier);
         }
     }
 
@@ -45,9 +45,9 @@ public class FPSEyeItem extends UniversalCurio {
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         if(slotContext.entity()instanceof Player player){
             long fps = player.getPersistentData().getLong("lsp_fpsvalue");
-            if(Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).getModifier(ATTID)==null){
-                Objects.requireNonNull(player.getAttribute(Attributes.ATTACK_DAMAGE)).addOrReplacePermanentModifier(new AttributeModifier(
-                        ATTID,calculateDamageModifier((int) fps), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+            if(Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).getModifier(ATTID)==null){
+                Objects.requireNonNull(player.getAttribute(ModAttribute.DAMAGE_MODIFIER)).addOrReplacePermanentModifier(new AttributeModifier(
+                        ATTID,calculateDamageModifier((int) fps), AttributeModifier.Operation.ADD_VALUE
                 ));
             }
         }

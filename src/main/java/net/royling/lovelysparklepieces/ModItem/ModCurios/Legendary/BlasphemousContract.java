@@ -38,7 +38,7 @@ public class BlasphemousContract extends UniversalCurio {
         modifiers.put(ModAttribute.DAMAGE_MODIFIER, new AttributeModifier(
                 ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"bc_attack"),-0.5, AttributeModifier.Operation.ADD_VALUE));
         modifiers.put(Attributes.ARMOR, new AttributeModifier(
-                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"bc_armor"),-1.0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"bc_armor"),-0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         return modifiers;
     }
     @Override

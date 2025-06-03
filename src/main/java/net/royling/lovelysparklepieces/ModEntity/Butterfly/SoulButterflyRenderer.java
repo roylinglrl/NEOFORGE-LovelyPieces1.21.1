@@ -9,7 +9,7 @@ import net.royling.lovelysparklepieces.ClientEvent.ModClientEvents;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 
 public class SoulButterflyRenderer extends MobRenderer<SoulButterflyEntity, SoulButterfly<SoulButterflyEntity>> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID, "textures/entity/soul_butterfly_yin.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID, "textures/entity/soul_butterfly_yang.png");
     public SoulButterflyRenderer(EntityRendererProvider.Context context) {
         super(context,new SoulButterfly<>(context.bakeLayer(SoulButterfly.LAYER_LOCATION)),0.2F);
     }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    },
+    "U": {
+      "item": "minecraft:sugar"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "AWA",
+    "USU",
+    "AWA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:mysterious_gel"
+  }
+}
