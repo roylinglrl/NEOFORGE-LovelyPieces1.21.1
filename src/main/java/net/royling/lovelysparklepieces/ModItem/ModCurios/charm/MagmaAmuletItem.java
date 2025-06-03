@@ -1,23 +1,17 @@
-package net.royling.lovelysparklepieces.ModItem.ModCurios.necklace;
+package net.royling.lovelysparklepieces.ModItem.ModCurios.charm;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ClientEvent.PlayerLavadef;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerSoul;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
-import net.royling.lovelysparklepieces.PlayerData.SoulData;
-import org.checkerframework.checker.units.qual.C;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
@@ -38,6 +32,9 @@ public class MagmaAmuletItem extends UniversalCurio {
                 player.getPersistentData().putInt("lsp_lava_def",player.getPersistentData().getInt("lsp_lava_def")-1);
                 if(player.getPersistentData().getInt("lsp_lava_def")>0){
                     player.setRemainingFireTicks(0);
+                }
+                if(player.getPersistentData().getInt("lsp_lava_def")<0){
+                    player.getPersistentData().putInt("lsp_lava_def",0);
                 }
                 PacketDistributor.sendToPlayer((ServerPlayer) player,new PlayerLavadef(player.getPersistentData().getInt("lsp_lava_def")));
             }else {

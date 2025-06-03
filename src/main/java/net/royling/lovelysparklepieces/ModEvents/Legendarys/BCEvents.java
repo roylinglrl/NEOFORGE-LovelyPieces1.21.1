@@ -45,10 +45,12 @@ public class BCEvents {
             }
         }
     }
+    //亵渎契约减少回复
     @SubscribeEvent
     public static void onHeal(LivingHealEvent event) {
         if (event.getEntity() instanceof Player player && hasBlasphemousContract(player)) {
-            event.setAmount(event.getAmount() * 0.25f);
+            float count = (float) (ModCurios.hasCurio(player,ModCurios.ERODED_FACE.get()) ? 0.5:0.25);
+            event.setAmount(event.getAmount() * count);
             if (player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.displayClientMessage(Component.translatable("msg.lsp.heal_deal").withStyle(ChatFormatting.DARK_RED), true);
             }

@@ -15,7 +15,7 @@ public class ModAttribute {
     public static final Holder<Attribute> CRIT_CHANCE = ATTRIBUTES.register("critical_hit_chance",
             ()->new RangedAttribute("attribute.lsp.critical_hit_chance",0d,0d,1d).setSyncable(true));
     public static final Holder<Attribute> DAMAGE_MODIFIER = ATTRIBUTES.register("damage_modifier",
-            ()->new RangedAttribute("attribute.lsp.damage_modifier",0d,0d,2147483648d).setSyncable(true));
+            ()->new RangedAttribute("attribute.lsp.damage_modifier",1d,0d,2147483648d).setSyncable(true));
     public static final Holder<Attribute> MAGIC_DAMAGE_MODIFIER = ATTRIBUTES.register("magic_damage_modifier",
             ()->new RangedAttribute("attribute.lsp.magic_damage_modifier",1d,0d,2147483648d).setSyncable(true));
 

@@ -38,51 +38,57 @@ public class AutoSmeltHandler {
             BlockPos pos = event.getPos();
             BlockState state = event.getState();
             if (!player.isCreative()) {
-                if (event.getPlayer() != null) {
-                    boolean hasRing = ModCurios.hasCurio(event.getPlayer(), ModCurios.INFERNO_RING.get());
-                    if (hasRing) {
-                        List<ItemStack> drops = Block.getDrops(state, (ServerLevel) level, pos, null
-                                , event.getPlayer(), event.getPlayer().getMainHandItem());
-                        List<ItemStack> smeltedDrops = new ArrayList<>();
-                        float totalExp = 0;
-                        boolean smeltedAnything = false;
-                        int smeltCount = 0;
-                        for (ItemStack drop : drops) {
-                            Optional<RecipeHolder<SmeltingRecipe>> recipeRecipeHolder = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(drop), level);
-                            if (recipeRecipeHolder.isPresent()) {
-                                ItemStack smeltedR = recipeRecipeHolder.get().value().assemble(new SingleRecipeInput(drop), level.registryAccess());
-                                totalExp += recipeRecipeHolder.get().value().getExperience();
-                                if (!smeltedR.isEmpty()) {
-                                    smeltedR.setCount(drop.getCount());
-                                    smeltedDrops.add(smeltedR);
-                                    smeltCount += drop.getCount();
-                                }
-                                smeltedAnything = true;
-                            } else {
-                                smeltedDrops.add(drop);
+                boolean hasRing = ModCurios.hasCurio(player, ModCurios.INFERNO_RING.get());
+                if (hasRing) {
+                    List<ItemStack> drops = Block.getDrops(state, (ServerLevel) level, pos, null, player, player.getMainHandItem());
+                    List<ItemStack> smeltedDrops = new ArrayList<>();
+                    float totalExp = 0;
+                    boolean smeltedAnything = false;
+                    int smeltCount = 0;
+                    for (ItemStack drop : drops) {
+                        Optional<RecipeHolder<SmeltingRecipe>> recipeHolder = level.getRecipeManager()
+                                .getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(drop), level);
+                        if (recipeHolder.isPresent()) {
+                            ItemStack smelted = recipeHolder.get().value().assemble(new SingleRecipeInput(drop), level.registryAccess());
+                            totalExp += recipeHolder.get().value().getExperience();
+                            if (!smelted.isEmpty()) {
+                                smelted.setCount(drop.getCount());
+                                smeltedDrops.add(smelted);
+                                smeltCount += drop.getCount();
                             }
+                            smeltedAnything = true;
+                        } else {
+                            smeltedDrops.add(drop);
                         }
-                        if (smeltedAnything) {
-                            event.setCanceled(true);
-                            ItemStack heldItem = player.getMainHandItem(); // 假设玩家用主手工具挖掘
-                            if (heldItem.isDamageableItem()) {
-                                // 消耗1点耐久，并处理工具损坏
-                                heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-                                level.removeBlock(pos, false);
-                                for (ItemStack smeltedDrop : smeltedDrops) {
-                                    ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, smeltedDrop);
-                                    itemEntity.setDefaultPickUpDelay(); // 设置默认拾取延迟
-                                    level.addFreshEntity(itemEntity);
-                                    ItemStack curioStack = CuriosApi.getCuriosInventory(player).flatMap(
-                                            curiosInventory -> curiosInventory.findFirstCurio(ModCurios.INFERNO_RING.get())).get().stack();
-                                    curioStack.hurtAndBreak(smeltCount,player,EquipmentSlot.MAINHAND);
-                                }
-                                if (totalExp > 0) {
-                                    ExperienceOrb experienceOrb = new ExperienceOrb(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, (int) totalExp);
-                                    level.addFreshEntity(experienceOrb);
-                                }
-                            }
+                    }
+                    if (smeltedAnything) {
+                        event.setCanceled(true);
+                        level.removeBlock(pos, false); // 移除方块
+                        // 生成冶炼后的掉落物
+                        for (ItemStack smeltedDrop : smeltedDrops) {
+                            ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, smeltedDrop);
+                            itemEntity.setDefaultPickUpDelay();
+                            level.addFreshEntity(itemEntity);
                         }
+                        // 生成经验
+                        if (totalExp > 0) {
+                            ExperienceOrb expOrb = new ExperienceOrb(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, (int) totalExp);
+                            level.addFreshEntity(expOrb);
+                        }
+
+                        // 如果主手持有工具，则消耗耐久
+                        ItemStack heldItem = player.getMainHandItem();
+                        if (!heldItem.isEmpty() && heldItem.isDamageableItem()) {
+                            heldItem.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                        }
+
+                        // 消耗饰品耐久
+                        int finalSmeltCount = smeltCount;
+                        CuriosApi.getCuriosInventory(player).flatMap(inv ->
+                                inv.findFirstCurio(ModCurios.INFERNO_RING.get())
+                        ).ifPresent(curio ->
+                                curio.stack().hurtAndBreak(finalSmeltCount, player, EquipmentSlot.MAINHAND)
+                        );
                     }
                 }
             }

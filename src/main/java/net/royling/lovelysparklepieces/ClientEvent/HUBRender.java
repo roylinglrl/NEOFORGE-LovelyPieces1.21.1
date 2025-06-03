@@ -181,8 +181,9 @@ public class HUBRender {
             double py = Math.round(player.getY() * 10.0) / 10.0;
             double pz = Math.round(player.getZ() * 10.0) / 10.0;
             String dimension = player.level().dimension().location().toString();
-            Component text = Component.literal(
-                    String.format("%s: x%.1f y%.1f z%.1f", getLevelDimension(dimension), px, py,pz)
+            Component text = Component.translatable(
+                    "gui.lovelysparklepieces.position",
+                    getLevelDimension(dimension), px, py, pz
             ).withStyle(ChatFormatting.GREEN);
             guiGraphics.drawString(
                     minecraft.font,text,
@@ -198,20 +199,20 @@ public class HUBRender {
             else {
                 moonSymbol = MOON_PHASES[phase];
             }
-            String phaseName = switch (phase) {
-                case 0 -> "满月";
-                case 1 -> "亏凸月";
-                case 2 -> "下弦月";
-                case 3 -> "残月";
-                case 4 -> "新月";
-                case 5 -> "蛾眉月";
-                case 6 -> "上弦月";
-                case 7 -> "盈凸月";
-                default -> "未知";
+            String phaseKey = switch (phase) {
+                case 0 -> "gui.lovelysparklepieces.moon.full";
+                case 1 -> "gui.lovelysparklepieces.moon.waning_gibbous";
+                case 2 -> "gui.lovelysparklepieces.moon.last_quarter";
+                case 3 -> "gui.lovelysparklepieces.moon.waning_crescent";
+                case 4 -> "gui.lovelysparklepieces.moon.new";
+                case 5 -> "gui.lovelysparklepieces.moon.waxing_crescent";
+                case 6 -> "gui.lovelysparklepieces.moon.first_quarter";
+                case 7 -> "gui.lovelysparklepieces.moon.waxing_gibbous";
+                default -> "gui.lovelysparklepieces.moon.unknown";
             };
-            Component text = Component.literal(moonSymbol+phaseName).withStyle(ChatFormatting.BOLD);
-            if(player.level().getDayTime()<11834){
-                text = Component.literal("On Day!");
+            Component text = Component.translatable(phaseKey).withStyle(ChatFormatting.BOLD);
+            if (player.level().getDayTime() < 11834) {
+                text = Component.translatable("gui.lovelysparklepieces.daytime");
             }
             guiGraphics.drawString(
                     minecraft.font,
@@ -220,13 +221,13 @@ public class HUBRender {
                     0x0080AA,true
             );
         }
-        if(ModCurios.hasCurio(player,ModCurios.PDA.get())){
-            String symbol = getWeatherSymbol(player.level(),player);
-            String weather = getWeatherString(player);
+        if (ModCurios.hasCurio(player, ModCurios.PDA.get())) {
+            String symbol = getWeatherSymbol(player.level(), player);
+            Component weatherText = Component.translatable(getWeatherKey(player));
             guiGraphics.drawString(
                     minecraft.font,
-                    Component.literal(symbol+weather),
-                    10,window.getGuiScaledHeight()/2-10,0xFFFFFF,true
+                    Component.literal(symbol).append(weatherText),
+                    10, window.getGuiScaledHeight() / 2 - 10, 0xFFFFFF, true
             );
         }
         if(ModCurios.hasCurio(player,ModCurios.EYE_MASK.get())){
@@ -309,11 +310,11 @@ public class HUBRender {
         if (speed >= 2.0) return ChatFormatting.YELLOW;
         return ChatFormatting.GREEN;
     }
-    private static String getLevelDimension(String dimension){
-        return switch (dimension){
-            case "minecraft:overworld"->"主世界";
-            case "minecraft:the_nether"->"下界";
-            case "minecraft:the_end"->"末地";
+    private static String getLevelDimension(String dimension) {
+        return switch (dimension) {
+            case "minecraft:overworld" -> Component.translatable("gui.lovelysparklepieces.dimension.overworld").getString();
+            case "minecraft:the_nether" -> Component.translatable("gui.lovelysparklepieces.dimension.nether").getString();
+            case "minecraft:the_end" -> Component.translatable("gui.lovelysparklepieces.dimension.end").getString();
             default -> dimension;
         };
     }
@@ -340,18 +341,19 @@ public class HUBRender {
         }
         return "☀";
     }
-    private static String getWeatherString(Player player) {
+
+    private static String getWeatherKey(Player player) {
         if (player.level().isThundering()) {
-            return "雷暴！！！";
+            return "gui.lovelysparklepieces.weather.thunder";
         }
         if (player.level().isRaining()) {
             Biome biome = player.level().getBiome(player.blockPosition()).value();
             return switch (biome.getPrecipitationAt(player.blockPosition())) {
-                case SNOW -> "雪";
-                case NONE -> "阴";
-                default -> "雨";
+                case SNOW -> "gui.lovelysparklepieces.weather.snow";
+                case NONE -> "gui.lovelysparklepieces.weather.overcast";
+                default -> "gui.lovelysparklepieces.weather.rain";
             };
         }
-        return "晴";
+        return "gui.lovelysparklepieces.weather.clear";
     }
 }

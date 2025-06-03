@@ -1,0 +1,6 @@
+{
+  "parent": "lovely_sparkle_pieces:block/blast_absorber",
+  "textures": {
+    "0": "lovely_sparkle_pieces:block/blast_absorber"
+  }
+}

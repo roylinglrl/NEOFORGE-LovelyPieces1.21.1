@@ -101,7 +101,7 @@ public class FlameSoulStaff extends Item {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level9"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.flame_soul_staff.desc1").withColor(ColorUtil.getRainbow()));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.flame_soul_staff.desc2").withColor(ColorUtil.getRainbow()));
-        tooltipComponents.add(Component.translatable("tooltiplovely_sparkle_pieces.flame_soul_staff.desc3").withColor(ColorUtil.getRainbow()));
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.flame_soul_staff.desc3").withColor(ColorUtil.getRainbow()));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.flame_soul_staff.desc4").withColor(ColorUtil.getRainbow()));
     }
 }

@@ -68,8 +68,8 @@ public class MagneticRingItem extends UniversalCurio {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level2"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.magnetic.des").withColor(ColorUtil.getRainbow()));
-        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.magnetic.des2").withColor(ColorUtil.getRainbow()));
-        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.magnetic.des3").withColor(ColorUtil.getRainbow()));
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.magnetic.des2").withColor(ColorUtil.getPulsatingColor(0xAAEEFF, 5, 0.2F, 1.0f)));
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.magnetic.des3").withColor(ColorUtil.getTechnoGlow(2f,1f)));
     }
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {

@@ -3,16 +3,20 @@ package net.royling.lovelysparklepieces.ModEntity.Butterfly;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -29,18 +33,82 @@ public class SoulButterflyEntity extends PathfinderMob {
     private LivingEntity owner;
     private static final int RETRY_INTERVAL = 20;
     private int retryTimer = 0;
+    private LivingEntity attackTarget;
+    public static final double ATTACK_RANGE = 16.0;
+    public static final double ATTACK_SPEED = 1.5;
+    public int attackCooldown = 0;
+    public static final int MAGIC_DAMAGE = 8;
     public SoulButterflyEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
     }
     public void setOwner(LivingEntity owner) {
         this.owner = owner;
+        if (owner != null) {
+            increaseButterflyCount(owner);
+        }
     }
-
+    public static int getButterflyCountByOwner(LivingEntity owner) {
+        return ownerButterflyCount.getOrDefault(owner.getUUID(), 0);
+    }
+    private void decreaseButterflyCount(LivingEntity owner) {
+        if (owner == null) return;
+        UUID ownerId = owner.getUUID();
+        int currentCount = ownerButterflyCount.getOrDefault(ownerId, getActualButterflyCount((Player) owner));
+        if (currentCount > 0) {
+            ownerButterflyCount.put(ownerId, currentCount - 1);
+        } else {
+            ownerButterflyCount.remove(ownerId);
+        }
+    }
+    public static int getButterflyCountByOwner(Player player) {
+        // 优先使用缓存计数，但验证其准确性
+        int cachedCount = ownerButterflyCount.getOrDefault(player.getUUID(), 0);
+        int actualCount = getActualButterflyCount(player);
+        // 如果缓存计数与实际计数不一致，使用实际计数
+        if (cachedCount != actualCount) {
+            ownerButterflyCount.put(player.getUUID(), actualCount);
+            return actualCount;
+        }
+        return cachedCount;
+    }
+    private void increaseButterflyCount(LivingEntity owner) {
+        if (owner == null) return;
+        UUID ownerId = owner.getUUID();
+        int currentCount = ownerButterflyCount.getOrDefault(ownerId, getActualButterflyCount((Player) owner));
+        ownerButterflyCount.put(ownerId, currentCount + 1);
+    }
     public LivingEntity getOwner() {
+        if (owner == null && ownerUUID != null && level() instanceof ServerLevel) {
+            Entity entity = ((ServerLevel) level()).getEntity(ownerUUID);
+            if (entity instanceof LivingEntity) {
+                owner = (LivingEntity) entity;
+            }
+        }
         return owner;
     }
-
-
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        return false;
+    }
+    public static void resetCountForPlayer(Player player) {
+        ownerButterflyCount.remove(player.getUUID());
+    }
+    public static int getActualButterflyCount(Player player) {
+        if (player.level().isClientSide) return 0;
+        int count = 0;
+        MinecraftServer server = player.getServer();
+        if (server == null) return 0;
+        // 遍历所有维度
+        for (ServerLevel level : server.getAllLevels()) {
+            for (SoulButterflyEntity butterfly : level.getEntitiesOfClass(SoulButterflyEntity.class, player.getBoundingBox().inflate(1000))) {
+                if (butterfly.getOwner() != null &&
+                        butterfly.getOwner().getUUID().equals(player.getUUID())) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
     @Override
     protected PathNavigation createNavigation(Level level) {
         FlyingPathNavigation navigation1 = new FlyingPathNavigation(this,level);
@@ -50,22 +118,22 @@ public class SoulButterflyEntity extends PathfinderMob {
         navigation1.setSpeedModifier(1.5f);
         return navigation1;
     }
-
     @Override
     public void travel(Vec3 travelVector) {
             this.setNoGravity(true);
         this.fallDistance = 0.0F;
             super.travel(travelVector);
     }
-
     @Override
     public boolean isNoGravity() {
         return true;
     }
-
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1,new SoulButterflyFollowOwnerGoal(this,5d));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10,true,false,entity->entity instanceof Enemy));
+        this.goalSelector.addGoal(2, new SoulButterflyAttackGoal(this, 8d));
+        this.goalSelector.addGoal(3,new SoulButterflyFollowOwnerGoal(this,5d));
+
     }
     public void teleportTo(double x, double y, double z) {
         // 强制设置位置并重置运动
@@ -82,12 +150,10 @@ public class SoulButterflyEntity extends PathfinderMob {
             );
         }
     }
-
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
     }
-
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
@@ -95,7 +161,6 @@ public class SoulButterflyEntity extends PathfinderMob {
             compound.putUUID("OwnerUUID", owner.getUUID());
         }
     }
-
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
@@ -103,7 +168,6 @@ public class SoulButterflyEntity extends PathfinderMob {
             ownerUUID = compound.getUUID("OwnerUUID");
         }
     }
-
     @Override
     public void tick() {
         super.tick();
@@ -138,6 +202,9 @@ public class SoulButterflyEntity extends PathfinderMob {
             } else {
                 retryTimer--;
             }
+            if(attackCooldown>0){
+                attackCooldown--;
+            }
         }
         if(owner == null)this.discard();
         if (this.horizontalCollision || this.verticalCollision) {
@@ -146,9 +213,11 @@ public class SoulButterflyEntity extends PathfinderMob {
     }
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0) // 设置最大生命值
+                .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 2.2)
-                .add(Attributes.FLYING_SPEED,3); // 设置移动速度
+                .add(Attributes.FLYING_SPEED,3)
+                .add(Attributes.ATTACK_DAMAGE,8);
+
 
     }
     public boolean isFlying() {
@@ -157,4 +226,14 @@ public class SoulButterflyEntity extends PathfinderMob {
     public AnimationState getAnimationState() {
         return this.isFlying() ? flyAnimationState : idleAnimationState;
     }
+    @Override
+    public void remove(RemovalReason reason) {
+        if (owner != null) {
+            decreaseButterflyCount(owner);
+        }
+        super.remove(reason);
+    }
+
+
+
 }

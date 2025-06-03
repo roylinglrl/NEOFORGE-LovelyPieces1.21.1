@@ -1,6 +1,5 @@
-package net.royling.lovelysparklepieces.ModItem.ModCurios.necklace;
+package net.royling.lovelysparklepieces.ModItem.ModCurios.charm;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;

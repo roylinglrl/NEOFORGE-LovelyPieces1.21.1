@@ -1,7 +1,6 @@
 package net.royling.lovelysparklepieces;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -16,20 +15,19 @@ import net.royling.lovelysparklepieces.ModCommand.ModCommands;
 import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModCreative.ModCreative;
 import net.royling.lovelysparklepieces.ModEffect.ModMobEffects;
-import net.royling.lovelysparklepieces.ModEntity.Butterfly.SoulButterflyRenderer;
 import net.royling.lovelysparklepieces.ModEntity.ModEntities;
 import net.royling.lovelysparklepieces.ModEvents.Gamblers.GamblersEvents;
 import net.royling.lovelysparklepieces.ModEvents.HeartSystem;
+import net.royling.lovelysparklepieces.ModEvents.Legendarys.*;
 import net.royling.lovelysparklepieces.ModEvents.necklace.LavaDefance;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 
 import net.royling.lovelysparklepieces.ModEvents.PlayerDamageModifierEvent;
-import net.royling.lovelysparklepieces.ModEvents.Legendarys.BCEvents;
-import net.royling.lovelysparklepieces.ModEvents.Legendarys.BowHandler;
 import net.royling.lovelysparklepieces.ModEvents.PlayerJoinHandler;
 import net.royling.lovelysparklepieces.ModEvents.boot.DoubleJumpEvent;
 import net.royling.lovelysparklepieces.ModEvents.boot.SteelBoot;
 import net.royling.lovelysparklepieces.ModItem.ModCuriosRender.MagmaAmuletRender;
+import net.royling.lovelysparklepieces.ModItem.ModCuriosRender.WitchHatRender;
 import net.royling.lovelysparklepieces.ModItem.ModDataComponents.ModDataComponents;
 import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
 import net.royling.lovelysparklepieces.ModSounds.ModSounds;
@@ -80,6 +78,7 @@ public class LovelySparklePieces
         ModDataComponents.register(modEventBus);
         ModMobEffects.MOB_EFFECTS.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
+        ModCurios.STRANGE_ITEMS.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(PlayerJoinHandler.class);
         NeoForge.EVENT_BUS.register(SoulData.class);
@@ -92,6 +91,8 @@ public class LovelySparklePieces
         NeoForge.EVENT_BUS.register(DoubleJumpEvent.class);
         NeoForge.EVENT_BUS.register(LavaDefance.class);
         NeoForge.EVENT_BUS.register(HeartSystem.class);
+        NeoForge.EVENT_BUS.register(PlayerDeadEvent.class);
+        NeoForge.EVENT_BUS.register(EmberCoreEvent.class);
 
     }
     private void registerNetwork(RegisterPayloadHandlersEvent event) {
@@ -107,6 +108,7 @@ public class LovelySparklePieces
                 registrar.playToClient(PlayerTemperature.TYPE,PlayerTemperature.STREAM_CODEC,PlayerTemperature::handle);
                 registrar.playToClient(DamageParticlePacket.TYPE,DamageParticlePacket.STREAM_CODEC,DamageParticlePacket::handle);
                 registrar.playToClient(PlayerLavadef.TYPE,PlayerLavadef.STREAM_CODEC,PlayerLavadef::handle);
+                registrar.playToServer(LeftClickShootPacket.TYPE,LeftClickShootPacket.STREAM_CODEC,LeftClickShootPacket::handle);
     }
     private void commonSetup(final FMLCommonSetupEvent event)
     {
@@ -129,13 +131,13 @@ public class LovelySparklePieces
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            EntityRenderers.register(ModEntities.BUTTERFLY.get(), SoulButterflyRenderer::new);
             event.enqueueWork(()->{
                 Minecraft.getInstance().particleEngine.register(
                         ModParticles.DAMAGE_NUMBER_PARTICLE.get(), new DamageNumberParticle.Provider()
                 );
             });
             CuriosRendererRegistry.register(ModCurios.MAGMA_AMULET.get(), MagmaAmuletRender::new);
+            CuriosRendererRegistry.register(ModCurios.WITCH_HAT.get(), WitchHatRender::new);
         }
     }
 

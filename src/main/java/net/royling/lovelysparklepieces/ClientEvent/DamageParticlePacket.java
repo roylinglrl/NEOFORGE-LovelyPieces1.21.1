@@ -52,15 +52,16 @@ public record DamageParticlePacket(String damageType, double damageCount, double
     }
     private static int getColorByDamageType(String damageType) {
         return switch (damageType) {
-            case "fire" -> 0xFFA500;    // 橙色
-            case "magic" -> 0x00FFFF;    // 紫色
-            case "fall" -> 0x808080;     // 灰色
+            case "fire" -> 0xFFA500;
+            case "magic" -> 0x00FFFF;
+            case "fall" -> 0x808080;
             case "thunder"->0xFFD700;
             case "arrow"->0x8B658B;
             case "explosion"->0x8B3A3A;
             case "frozen"->0x7EC0EE;
+            case "silver"->0xF8F8FF;
             case "attack" ->0xAA0000;
-            default -> 0xCC3700;         // 红色（默认）
+            default -> 0xCC3700;
         };
     }
 }

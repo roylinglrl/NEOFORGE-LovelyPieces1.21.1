@@ -25,6 +25,20 @@ public class ModDataComponents {
                             .persistent(EnergyComponent.CODEC)
                             .build());
 
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<DBSHCountData>> MAKAROV_COUNT =
+            DATA_COMPONENT_TYPES.register("makarov_count",()->
+                    DataComponentType.<DBSHCountData>builder()
+                            .persistent(DBSHCountData.CODEC)
+                            .networkSynchronized(DBSHCountData.STREAM_CODEC)
+                            .build());
+
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<ShootCDData>> SHOOT_COOLDOWN =
+            DATA_COMPONENT_TYPES.register("shoot_cooldown",()->
+                    DataComponentType.<ShootCDData>builder()
+                            .persistent(ShootCDData.CODEC)
+                            .networkSynchronized(ShootCDData.STREAM_CODEC)
+                            .build());
+
     public static void register(IEventBus eventBus) {
         DATA_COMPONENT_TYPES.register(eventBus);
     }

@@ -17,6 +17,7 @@ public record OpenChest() implements CustomPacketPayload {
     public Type<OpenChest> type() {
         return TYPE;
     }
+
     public static void handle(OpenChest openChest,IPayloadContext context){
         context.enqueueWork(()->{
             if (context.player()instanceof ServerPlayer player){

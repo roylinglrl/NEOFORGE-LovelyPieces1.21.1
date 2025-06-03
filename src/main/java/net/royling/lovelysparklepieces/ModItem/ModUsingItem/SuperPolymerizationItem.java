@@ -22,7 +22,13 @@ public class SuperPolymerizationItem extends Item {
 
     @Override
     public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        return ModItems.SUPERPOLYMERIZATION.get().getDefaultInstance();
+        int damage = itemStack.getDamageValue();
+        if(itemStack.getDamageValue()+1>=itemStack.getMaxDamage()){
+            return ItemStack.EMPTY;
+        }
+        ItemStack newStack = new ItemStack(itemStack.getItem());
+        newStack.setDamageValue(itemStack.getDamageValue()+1);
+        return newStack;
     }
 
     @Override

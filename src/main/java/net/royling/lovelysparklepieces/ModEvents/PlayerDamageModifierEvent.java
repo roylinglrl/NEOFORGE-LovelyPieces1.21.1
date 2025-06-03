@@ -2,16 +2,23 @@ package net.royling.lovelysparklepieces.ModEvents;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,6 +27,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -28,6 +36,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.royling.lovelysparklepieces.ClientEvent.DamageParticlePacket;
 import net.royling.lovelysparklepieces.ClientEvent.PlayerSoul;
+import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModEffect.ModMobEffects;
@@ -52,7 +61,8 @@ public class PlayerDamageModifierEvent {
             entry(DamageTypeTags.IS_FALL, "fall"),
             entry(DamageTypeTags.IS_LIGHTNING, "thunder"),
             entry(DamageTypeTags.IS_EXPLOSION, "explosion"),
-            entry(DamageTypeTags.IS_FREEZING, "frozen")
+            entry(DamageTypeTags.IS_FREEZING, "frozen"),
+            entry(TagKey.create(Registries.DAMAGE_TYPE,ResourceLocation.withDefaultNamespace("is_silver")),"silver")
     );
     private static final Map<TagKey<DamageType>, String> DAMAGE_TYPE_PRIORITY_MAP = new LinkedHashMap<>();
     static {
@@ -62,6 +72,7 @@ public class PlayerDamageModifierEvent {
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_FALL, "fall");
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_LIGHTNING, "thunder");
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_EXPLOSION, "explosion");
+        DAMAGE_TYPE_PRIORITY_MAP.put(TagKey.create(Registries.DAMAGE_TYPE,ResourceLocation.withDefaultNamespace("is_silver")), "silver");
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_FREEZING, "frozen");
         // ... 你可以根据需要添加更多标签和优先级
     }
@@ -69,10 +80,10 @@ public class PlayerDamageModifierEvent {
         // 遍历优先级Map
         for (Map.Entry<TagKey<DamageType>, String> entry : DAMAGE_TYPE_PRIORITY_MAP.entrySet()) {
             if (damageType.is(entry.getKey())) {
-                return entry.getValue(); // 如果伤害类型包含此标签，则返回对应的字符串
+                return entry.getValue();
             }
         }
-        return "attack"; // 如果没有匹配的标签，返回一个默认值
+        return "attack";
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
@@ -80,7 +91,7 @@ public class PlayerDamageModifierEvent {
         // 获取造成伤害的实体（来源实体和直接实体）
         Entity source = event.getSource().getEntity();
         Entity direct = event.getSource().getDirectEntity();
-
+        LivingEntity target = event.getEntity();
         // 判断是否由玩家造成伤害
         Player player = null;
         if (source instanceof Player) {
@@ -88,7 +99,6 @@ public class PlayerDamageModifierEvent {
         } else if (direct instanceof Player) {
             player = (Player) direct;
         }
-
         // 初始化倍率，用于最终粒子效果显示
         double magnification = 1.0;
 
@@ -109,7 +119,13 @@ public class PlayerDamageModifierEvent {
                     if (player.hasEffect(ModMobEffects.OVERHEAT_EFFECT)) {
                         baseDamage = 0;
                     }
-                    TemperatureData.addTemperature(player, 10);
+                    if(player.getEffect(ModMobEffects.OVERHEAT_EFFECT)==null)
+                        TemperatureData.addTemperature(player, 10);
+                }
+                else if(player.hasEffect(ModMobEffects.OVERHEAT_EFFECT)&&!event.getSource().is(DamageTypeTags.WITCH_RESISTANT_TO)){
+                    DamageSource damageSource = player.level().damageSources().indirectMagic(player,player);
+                    event.getEntity().hurt(damageSource,2);
+                    event.getEntity().invulnerableTime=0;
                 }
             }
             //皮革箭袋
@@ -148,6 +164,15 @@ public class PlayerDamageModifierEvent {
             }
             baseDamage *= (1 + multiple);
 
+            //减速
+            if(ModCurios.hasCurio(player,ModCurios.UFFFD.get())){
+                if(event.getSource().is(DamageTypes.PLAYER_ATTACK)){
+                    if(player.getRandom().nextDouble()<0.25){
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,35,100));
+                    }
+                }
+            }
+
             // 获取“增伤”属性并进行伤害倍率计算
             AttributeInstance dmgAttr = player.getAttribute(ModAttribute.DAMAGE_MODIFIER);
             if (dmgAttr != null) {
@@ -183,6 +208,15 @@ public class PlayerDamageModifierEvent {
                 event.setNewDamage((float) baseDamage);
             }
 
+            //银伤害对亡灵增伤50%
+            if(event.getSource().is(TagKey.create(Registries.DAMAGE_TYPE,ResourceLocation.withDefaultNamespace("is_silver")))){
+                System.out.println("is Silver Damage");
+                if(event.getEntity()instanceof LivingEntity entity && entity.getType().is(EntityTypeTags.UNDEAD)) {
+                    System.out.println("Is Undead");
+                    event.setNewDamage(event.getNewDamage()*1.50f);
+                }
+            }
+
             if (LSPConfig.IS_DAMAGE_NUM.get())
             {
                 // 如果是服务端玩家，发送伤害粒子包用于客户端显示
@@ -206,38 +240,6 @@ public class PlayerDamageModifierEvent {
                             magnification
                     ));
                 }
-            }
-        }
-    }
-
-
-
-    @SubscribeEvent
-    public static void onTooltip(ItemTooltipEvent event) {
-        for (int i = 0; i < event.getToolTip().size(); i++) {
-            Component component = event.getToolTip().get(i);
-            String rawText = component.getString(); // 获取原始文本
-
-            // 获取当前语言的属性名称（自动适配中英文）
-            String damageKey = Component.translatable("attribute.lsp.damage_modifier").getString();
-
-            // 构建动态正则表达式
-            Pattern pattern = Pattern.compile(
-                    "([+-])(\\d+\\.?\\d*)\\s*" + Pattern.quote(damageKey)
-            );
-
-            Matcher matcher = pattern.matcher(rawText);
-            if (matcher.find()) {
-                // 转换数值到百分比
-                double value = Double.parseDouble(matcher.group(2));
-                int percentage = (int) Math.round(value * 100);
-
-                // 构建新文本（保留符号和样式）
-                MutableComponent newText = Component.literal(matcher.group(1) + percentage + "% ")
-                        .append(Component.translatable("attribute.lsp.damage_modifier"))
-                        .withStyle(component.getStyle());
-
-                event.getToolTip().set(i, newText);
             }
         }
     }
@@ -266,48 +268,4 @@ public class PlayerDamageModifierEvent {
                 })
                 .orElse(Collections.emptyList());
     }
-
-    @SubscribeEvent
-    public static void SetTooltip(ItemTooltipEvent event){
-        ItemStack stack = event.getItemStack();
-        Item item = stack.getItem();
-        List<Component> tooltip = event.getToolTip();
-        Player player = Minecraft.getInstance().player;
-        if (player == null) return; // 确保玩家存在
-
-        for (SetBonus bonus : SetBonusRegistry.ALL){
-            if (bonus.matches(item)){
-                tooltip.add(Component.literal("-------------------").withStyle(ChatFormatting.GRAY));
-                tooltip.add(Component.translatable("tooltip.set_bonus.title").withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
-                tooltip.add(Component.translatable("tooltip.set_bonus.items")
-                        .withStyle(ChatFormatting.YELLOW));
-                bonus.getItems().forEach(setItem -> {
-                    // 检查玩家是否穿戴了该物品
-                    boolean isEquipped = CuriosApi.getCuriosInventory(player)
-                            .map(handler ->
-                                    !handler.findCurios(testStack -> testStack.getItem() == setItem).isEmpty()
-                            )
-                            .orElse(false);
-                    // 根据穿戴状态设置颜色
-                    ChatFormatting color = isEquipped ? ChatFormatting.GREEN : ChatFormatting.GRAY;
-                    tooltip.add(Component.translatable("tooltip.set_bonus.item_entry",
-                                    setItem.getDescription())
-                            .withStyle(color));
-                });                        tooltip.add(Component.translatable("tooltip.set_bonus.effects")
-                                .withStyle(ChatFormatting.YELLOW));
-
-                bonus.getStages().forEach(stage ->
-                        tooltip.add(Component.translatable("tooltip.set_bonus.stage_entry",
-                                        stage.requiredCount(),
-                                        Component.translatable(getStageTranslationKey(stage)))
-                                .withStyle(ChatFormatting.BLUE))
-                );
-                break;
-            }
-        }
-    }
-
-    private static String getStageTranslationKey(SetBonusStage stage) {
-            return stage.tooltip();
-     }
 }

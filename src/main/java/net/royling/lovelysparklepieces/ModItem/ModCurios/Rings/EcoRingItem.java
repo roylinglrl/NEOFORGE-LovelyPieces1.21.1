@@ -1,11 +1,16 @@
 package net.royling.lovelysparklepieces.ModItem.ModCurios.Rings;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.royling.lovelysparklepieces.ModBlock.ModBlocks;
+import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import top.theillusivec4.curios.api.SlotContext;
@@ -16,10 +21,18 @@ public class EcoRingItem extends UniversalCurio {
     public EcoRingItem(Properties properties) {
         super(properties.stacksTo(1));
     }
-
     @Override
     public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
-        return !(slotContext.entity() instanceof Player player) || player.isCreative();
+        if (slotContext.entity() instanceof Player player) {
+            // 创造模式始终可以解除
+            if (player.isCreative()) {
+                return true;
+            }
+
+            // 检查玩家周围是否有饰品工作站方块
+            return hasCurioWorkbenchNearby(player);
+        }
+        return false;
     }
 
     @Override
@@ -36,5 +49,26 @@ public class EcoRingItem extends UniversalCurio {
             return !ModCurios.hasCurio(player,this);
         }
         return true;
+    }
+    private boolean hasCurioWorkbenchNearby(Player player) {
+        Level world = player.level();
+        BlockPos playerPos = player.blockPosition();
+        int searchRadius = 5; // 搜索半径（方块数）
+
+        // 搜索以玩家为中心的立方体区域
+        for (int x = -searchRadius; x <= searchRadius; x++) {
+            for (int y = -searchRadius; y <= searchRadius; y++) {
+                for (int z = -searchRadius; z <= searchRadius; z++) {
+                    BlockPos pos = playerPos.offset(x, y, z);
+                    Block block = world.getBlockState(pos).getBlock();
+
+                    // 检查方块是否是饰品工作站
+                    if (block.equals(ModBlocks.CURIO_WORKBENCH.get())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

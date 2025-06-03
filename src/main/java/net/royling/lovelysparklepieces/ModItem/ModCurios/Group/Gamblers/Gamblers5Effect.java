@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.Group.Set.SetBonusStage;
+import net.royling.lovelysparklepieces.PlayerData.ChipsData;
 
 public class Gamblers5Effect implements SetBonusStage {
     public int requiredCount() { return 5; }
@@ -15,6 +16,10 @@ public class Gamblers5Effect implements SetBonusStage {
     }
 
     public void onTick(Player player) {
+        if(player.tickCount % 100 != 0)return;
+        if(ChipsData.getChips(player)>=600){
+            ChipsData.removeChip(player,100);
+        }
     }
 
     public void onDeactivated(Player player) {

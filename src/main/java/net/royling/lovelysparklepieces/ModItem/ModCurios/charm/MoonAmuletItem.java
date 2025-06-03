@@ -1,16 +1,10 @@
-package net.royling.lovelysparklepieces.ModItem.ModCurios.necklace;
+package net.royling.lovelysparklepieces.ModItem.ModCurios.charm;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
@@ -18,7 +12,6 @@ import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 import java.util.Objects;

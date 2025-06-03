@@ -57,7 +57,6 @@ public class ModItemModelProvider extends ItemModelProvider{
         basicItem(ModCurios.POSEIDON_RESPIRATOR.get());
         basicItem(ModCurios.EYE_MASK.get());
         basicItem(ModCurios.MARKSMAN_GOGGLES.get());
-        basicItem(ModCurios.WITCH_HAT.get());
         basicItem(ModCurios.YELLOW_HEADSCARF.get());
         basicItem(ModCurios.HEAVY_BIGROCK.get());
         basicItem(ModCurios.POCKET_WATCH.get());
@@ -78,6 +77,15 @@ public class ModItemModelProvider extends ItemModelProvider{
         basicItem(ModCurios.MIRROR_AND_WATER.get());
         basicItem(ModCurios.GOLDEN_HOOK.get());
         basicItem(ModCurios.ADVENTURER_BELT.get());
+        basicItem(ModCurios.SLIME_EATER.get());
+        basicItem(ModCurios.GLUTTONY_AMULET.get());
+        basicItem(ModCurios.POWER_AMULET.get());
+        basicItem(ModCurios.MYSTERIOUS_GEL.get());
+        basicItem(ModCurios.ERODED_FACE.get());
+        basicItem(ModCurios.UFFFD.get());
+        basicItem(ModCurios.EMBER_CORE.get());
+        basicItem(ModCurios.SOUL_MARK.get());
+        basicItem(ModCurios.VALORANT.get());
 
         //
         handheldItem(ModItems.SOUL_TORCH.get());
@@ -86,12 +94,18 @@ public class ModItemModelProvider extends ItemModelProvider{
         handheldItem(ModItems.FIREBALL_STAFF.get());
         handheldItem(ModItems.POLYMERIZATION.get());
         handheldItem(ModItems.SUPERPOLYMERIZATION.get());
-        handheldItem(ModItems.FISHING_TREASURE.get());
+        basicItem(ModItems.FISHING_TREASURE.get());
         handheldItem(ModItems.PIRATE_SCIMITAR.get());
         handheldItem(ModItems.FISH_HOE.get());
         handheldItem(ModItems.FISH_AXE.get());
         handheldItem(ModItems.FISH_PICKAXE.get());
         handheldItem(ModItems.FISH_SHOVEL.get());
-        handheldItem(ModItems.MOJA_COLA.get());
+        basicItem(ModItems.MOJA_COLA.get());
+        basicItem(ModItems.FLINTLOCK_BULLET.get());
+        basicItem(ModItems.BATTERY.get());
+        basicItem(ModItems.INFINITE_APPLE.get());
+        basicItem(ModItems.MULTI_PURPOSE_TOOL.get());
+        basicItem(ModItems.CAPITALIST_CAKE.get());
+
     }
 }

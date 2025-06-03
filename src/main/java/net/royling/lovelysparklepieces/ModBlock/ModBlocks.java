@@ -69,5 +69,19 @@ public class ModBlocks {
     public static final Supplier<Item> MOLTEN_DIRT_ITEM = BLOCK_ITEMS.register(
             "molten_dirt",()->new BlockItem(MOLTEN_DIRT.get(),new Item.Properties())
     );
+    public static final Supplier<Block> BLAST_ABSORBER = BLOCKS.register(
+            "blast_absorber",
+            ()->new BlastAbsorber(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK))
+    );
+    public static final Supplier<Item> BLAST_ABSORBER_ITEM = BLOCK_ITEMS.register(
+            "blast_absorber",()->new BlockItem(BLAST_ABSORBER.get(),new Item.Properties())
+    );
+    public static final Supplier<Block> CURIO_WORKBENCH = BLOCKS.register(
+            "curio_workbench",
+            ()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK))
+    );
+    public static final Supplier<Item> CURIO_WORKBENCH_ITEM = BLOCK_ITEMS.register(
+            "curio_workbench",()->new BlockItem(CURIO_WORKBENCH.get(),new Item.Properties())
+    );
 
 }

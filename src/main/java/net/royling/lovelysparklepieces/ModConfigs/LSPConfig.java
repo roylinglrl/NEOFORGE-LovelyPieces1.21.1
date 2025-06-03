@@ -12,9 +12,14 @@ public class LSPConfig {
     public static final ModConfigSpec SPEC;
     public static final ModConfigSpec.DoubleValue MAGNET_RADIUS;
     public static final ModConfigSpec.DoubleValue STRONG_MAGNET_RADIUS;
+    public static final ModConfigSpec.DoubleValue CRIT_RING;
+    public static final ModConfigSpec.DoubleValue CRUSHED_STONE_RING;
+    public static final ModConfigSpec.IntValue ECO_MIN;
+    public static final ModConfigSpec.IntValue ECO_MAX;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> INSULT_MESSAGES;
     public static final ModConfigSpec.BooleanValue IS_DAMAGE_NUM;
     public static final ModConfigSpec.BooleanValue IS_START_ITEM;
+    public static final ModConfigSpec.BooleanValue IS_STRANGE_ITEM;
     static{
         BUILDER.push("PiecesSettings");
         MAGNET_RADIUS = BUILDER
@@ -29,8 +34,21 @@ public class LSPConfig {
                 .comment("最好不要设置的太大，可能会有性能问题")
                 .comment("Radius of the Strong Magnet Ring (Default: 9.0, Min: 1.0, Max: 269.0)")
                 .comment("do not set it too large, it may cause lag")
-
                 .defineInRange("strongMagnetRadius", 9.0, 1.0, 269.0);
+        CRIT_RING = BUILDER
+                .comment("暴击戒指提供的暴击几率")
+                .defineInRange("crit Ring chance",0.08,0.00,1.00);
+        CRUSHED_STONE_RING=BUILDER
+                .comment("碎石戒指提供的挖掘速率")
+                .defineInRange("crushed stone",0.15,0,100);
+
+        ECO_MIN=BUILDER
+                .comment("生态戒指提供的最小煤炭数量")
+                .defineInRange("min coal count",8,1,16384);
+        ECO_MAX=BUILDER
+                .comment("生态戒指提供的最大煤炭数量")
+                .defineInRange("max coal count",12,1,16384);
+
         INSULT_MESSAGES=BUILDER
                 .comment("当玩家在启用杂鱼保护伞饰品且keepInventory为false时死亡，发送的提示(嘲讽)消息列表")
                 .comment("仅在'enableInsultMessage'设置为true时生效")
@@ -65,6 +83,10 @@ public class LSPConfig {
                 .comment("是否启用开局物品？")
                 .comment("Is Start Item?")
                 .define("boolean start item",true);
+        IS_STRANGE_ITEM=BUILDER
+                .comment("是否启用独特的道具？")
+                .comment("内存戒指 夜莺戒指 FPS之眼等")
+                .define("Boolean Strange Item",true);
         SPEC=BUILDER.build();
     }
 }
