@@ -1,7 +1,6 @@
-package net.royling.lovelysparklepieces.ModEntity.Server;
+package net.royling.lovelysparklepieces.ModEntity.Common;
 
 
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -11,7 +10,7 @@ import net.royling.lovelysparklepieces.ModEntity.ModEntities;
 
 @EventBusSubscriber(modid = LovelySparklePieces.MODID,bus = EventBusSubscriber.Bus.MOD)
 
-public class ModEntityServerEvent {
+public class ModEntityCommonEvent {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event){
         event.put(ModEntities.BUTTERFLY.get(), SoulButterflyEntity.createAttributes().build());

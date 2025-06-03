@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "pattern": [
+    " C ",
+    "OEO",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:ufffd"
+  }
+}

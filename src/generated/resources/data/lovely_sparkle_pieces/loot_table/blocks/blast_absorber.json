@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "lovely_sparkle_pieces:blast_absorber"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "lovely_sparkle_pieces:blocks/blast_absorber"
+}

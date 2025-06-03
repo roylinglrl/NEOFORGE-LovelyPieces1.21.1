@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "minecraft:ghast_tear"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "S": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "DGD",
+    "DSD",
+    "DND"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:eroded_face"
+  }
+}
