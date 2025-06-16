@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "lovely_sparkle_pieces:multi_purpose_tool"
+    },
+    "W": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WMW",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:curio_workbench"
+  }
+}

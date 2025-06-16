@@ -1,0 +1,21 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:straw_sandals"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:crystal_boot"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

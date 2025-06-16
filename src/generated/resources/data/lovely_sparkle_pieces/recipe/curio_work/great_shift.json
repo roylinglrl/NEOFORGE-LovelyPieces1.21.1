@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:ender_pearl"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:great_shift"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ]
+}

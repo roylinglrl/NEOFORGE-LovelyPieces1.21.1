@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "lovely_sparkle_pieces:moonstone_crater_placed"
+  ],
+  "step": "surface_structures",
+  "min": 0,
+  "max": 128
+}

@@ -14,7 +14,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
@@ -74,16 +76,30 @@ public class AdventurersBelt extends UniversalCurio {
         }
     }
 
-    @Override
+
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        // 添加空检查防止NullPointerException
+        if (context.level() == null) {
+            // 当level为null时添加默认提示
+            tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer.des").withColor(ColorUtil.getRainbow()));
+            tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer.des2").withColor(ColorUtil.getRainbow()));
+            tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer_add", 0.0f).withColor(ColorUtil.getRainbow()));
+            return;
+        }
         Player player = Minecraft.getInstance().player;
         BlockPos pos = null;
-        if (player != null) pos = player.blockPosition();
         int distance = 0;
-        if (pos != null) distance = Math.abs(pos.getX())+Math.abs(pos.getZ());
-        double bonus = Math.min(distance/10000.0,1)*0.25;
+        if (player != null) {
+            pos = player.blockPosition();
+            if (pos != null) {
+                distance = Math.abs(pos.getX()) + Math.abs(pos.getZ());
+            }
+        }
+        double bonus = Math.min(distance / 10000.0, 1) * 0.25;
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer.des").withColor(ColorUtil.getRainbow()));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer.des2").withColor(ColorUtil.getRainbow()));
-        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer_add",(float)bonus*100).withColor(ColorUtil.getRainbow()));
+        tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.adventurer_add", (float)bonus * 100).withColor(ColorUtil.getRainbow()));
     }
 }
+

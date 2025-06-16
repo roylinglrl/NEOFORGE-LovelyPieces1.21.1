@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:eroded_face"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:nether_star"
+    },
+    {
+      "item": "minecraft:diamond_sword"
+    },
+    {
+      "item": "minecraft:netherite_chestplate"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

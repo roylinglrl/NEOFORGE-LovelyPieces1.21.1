@@ -29,6 +29,14 @@ public class BlockStateGene extends BlockStateProvider {
         simpleBlockItem(ModBlocks.MOLTEN_STONE.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/molten_stone")));
         simpleBlock(ModBlocks.CURIO_WORKBENCH.get(),cubeAll(ModBlocks.CURIO_WORKBENCH.get()));
         simpleBlockItem(ModBlocks.CURIO_WORKBENCH.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/curio_workbench")));
+        simpleBlock(ModBlocks.MOONSTONE.get(),cubeAll(ModBlocks.MOONSTONE.get()));
+        simpleBlockItem(ModBlocks.MOONSTONE.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/moonstone")));
 
+        simpleBlock(ModBlocks.LAB_BAW_FLOOR.get(),cubeAll(ModBlocks.LAB_BAW_FLOOR.get()));
+        simpleBlockItem(ModBlocks.LAB_BAW_FLOOR.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/labblock_baw_floor")));
+        simpleBlock(ModBlocks.LAB_RUSTY_PLATE.get(),cubeAll(ModBlocks.LAB_RUSTY_PLATE.get()));
+        simpleBlockItem(ModBlocks.LAB_RUSTY_PLATE.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/labblock_rusty_plate")));
+        simpleBlock(ModBlocks.LAB_RUSTY_PLATE2.get(),cubeAll(ModBlocks.LAB_RUSTY_PLATE2.get()));
+        simpleBlockItem(ModBlocks.LAB_RUSTY_PLATE2.get(),models().getExistingFile(mcLoc("lovely_sparkle_pieces:block/labblock_rusty_plate2")));
     }
 }

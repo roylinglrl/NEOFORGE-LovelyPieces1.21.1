@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:clock"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:speedometer"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:compass"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ]
+}

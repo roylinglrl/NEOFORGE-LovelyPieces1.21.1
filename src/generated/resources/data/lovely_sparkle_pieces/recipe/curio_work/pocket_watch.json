@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:clock"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:pocket_watch"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:glass_pane"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    }
+  ]
+}

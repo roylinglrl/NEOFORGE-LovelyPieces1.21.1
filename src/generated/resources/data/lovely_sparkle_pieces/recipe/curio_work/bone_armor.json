@@ -1,0 +1,36 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:bone"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:bone_armor"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ public record ShootCDData(
             RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.fieldOf("shoot_cooldown").forGetter(ShootCDData::shootCooldown)
     ).apply(instance, ShootCDData::new));
+
     public static final StreamCodec<RegistryFriendlyByteBuf, ShootCDData> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT, ShootCDData::shootCooldown,
             ShootCDData::new

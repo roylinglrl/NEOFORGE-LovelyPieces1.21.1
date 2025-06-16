@@ -6,6 +6,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModEntity.Abigail.AbigailEntity;
 import net.royling.lovelysparklepieces.ModEntity.Bullet.BulletEntity;
 import net.royling.lovelysparklepieces.ModEntity.Butterfly.SoulButterflyEntity;
 
@@ -24,5 +25,11 @@ public class ModEntities {
                     .sized(0.1F, 0.1F)
                     .clientTrackingRange(8)
                     .updateInterval(2)
+                    .build("bullet"));
+
+    public static final Supplier<EntityType<AbigailEntity>> ABIGAIL =
+            ENTITIES.register("abigail", () -> EntityType.Builder.of(AbigailEntity::new, MobCategory.CREATURE)
+                    .sized(0.8F, 1.3F)
+                    .clientTrackingRange(8)
                     .build("bullet"));
 }

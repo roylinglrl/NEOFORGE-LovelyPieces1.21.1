@@ -1,0 +1,24 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:straw_sandals"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:roller_skates"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

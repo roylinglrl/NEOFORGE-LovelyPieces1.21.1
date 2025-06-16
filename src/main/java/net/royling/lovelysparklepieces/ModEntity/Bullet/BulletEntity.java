@@ -7,22 +7,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModEntity.ModEntities;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BulletEntity extends ThrowableProjectile {
     private double damageAmount = 2.0D;
     private BulletDamageType currentDamageType = BulletDamageType.PROJECTILE;
     private boolean isNoIv = false;
-
+    private boolean isTrack = false;
 
 
     public enum BulletDamageType {
@@ -118,6 +121,10 @@ public class BulletEntity extends ThrowableProjectile {
     public void setNoIv(boolean noIv){
         this.isNoIv = noIv;
     }
+    public void setTrack(boolean isTrack){this.isTrack = isTrack;}
+    public boolean getTrack(){
+        return this.isTrack;
+    }
 
 
     protected void onHitBlock(BlockHitResult blockHitResult) {
@@ -138,6 +145,9 @@ public class BulletEntity extends ThrowableProjectile {
     @Override
     public void tick() {
         super.tick();
+        if (!this.level().isClientSide && this.isTrack && this.tickCount >= 5) {
+            trackNearestEnemy();
+        }
         // 如果子弹存活时间过长，也让它消失
         if (this.tickCount > 100) {
             // 约 5 秒
@@ -149,6 +159,51 @@ public class BulletEntity extends ThrowableProjectile {
             // 例如: this.level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
         }
     }
+    private void trackNearestEnemy() {
+        double searchRadius = 16.0; // 搜索半径
+        Entity owner = this.getOwner();
+
+        // 获取范围内所有生物实体
+        List<LivingEntity> entities = this.level().getEntitiesOfClass(
+                LivingEntity.class,
+                this.getBoundingBox().inflate(searchRadius),
+                EntitySelector.NO_CREATIVE_OR_SPECTATOR
+        );
+
+        // 过滤条件：排除发射者、队友、死亡的实体
+        List<LivingEntity> enemies = entities.stream()
+                .filter(e -> e != owner)
+                .filter(e -> !(owner instanceof Mob) || ((Mob) owner).getTarget() != e) // 非队友
+                .filter(LivingEntity::isAlive)
+                .collect(Collectors.toList());
+        if (enemies.isEmpty()) return;
+
+        // 找到最近的敌人
+        LivingEntity target = enemies.stream()
+                .min(Comparator.comparingDouble(e -> e.distanceToSqr(this)))
+                .orElse(null);
+
+        if (target != null) {
+            // 计算方向向量
+            Vec3 direction = target.position()
+                    .add(0, target.getBbHeight() / 2, 0) // 瞄准身体中心
+                    .subtract(this.position())
+                    .normalize();
+
+            // 设置速度（保持原速度大小）
+            Vec3 currentMotion = this.getDeltaMovement();
+            double speed = currentMotion.length();
+            Vec3 newMotion = direction.scale(speed);
+
+            this.setDeltaMovement(newMotion);
+
+            // 更新子弹旋转角度
+            this.setYRot((float) Math.toDegrees(Math.atan2(newMotion.x, newMotion.z)));
+            this.setXRot((float) Math.toDegrees(Math.atan2(newMotion.y, Math.sqrt(newMotion.x * newMotion.x + newMotion.z * newMotion.z))));
+        }
+    }
+
+
     @Override
     public boolean isPickable() {
         return false;

@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:position_tracker"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:global_positioning_system"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:pocket_watch"
+    },
+    {
+      "item": "lovely_sparkle_pieces:speedometer"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:copper_block"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:polymerization"
+    }
+  ]
+}

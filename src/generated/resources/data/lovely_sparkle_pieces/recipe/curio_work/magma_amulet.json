@@ -1,0 +1,36 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:magma_cream"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:magma_amulet"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:nether_brick"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ]
+}

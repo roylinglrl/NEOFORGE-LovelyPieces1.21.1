@@ -1,0 +1,24 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:polymerization"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:warrior_greaves"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:blade_boot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:guard_boot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:crystal_boot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

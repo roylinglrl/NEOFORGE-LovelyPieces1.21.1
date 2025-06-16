@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerTemperature;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.PlayerTemperature;
 
 public class TemperatureData {
     public static int gettemperatures(Player player){

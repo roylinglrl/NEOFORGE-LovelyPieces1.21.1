@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:mysterious_gel"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:slime_eater"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:slime_block"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ]
+}

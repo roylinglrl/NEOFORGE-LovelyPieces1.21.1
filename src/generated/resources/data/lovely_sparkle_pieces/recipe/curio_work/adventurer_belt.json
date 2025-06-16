@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:leather"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:adventurer_belt"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:compass"
+    },
+    {
+      "item": "minecraft:iron_boots"
+    },
+    {
+      "item": "minecraft:spyglass"
+    },
+    {
+      "item": "minecraft:torch"
+    }
+  ]
+}

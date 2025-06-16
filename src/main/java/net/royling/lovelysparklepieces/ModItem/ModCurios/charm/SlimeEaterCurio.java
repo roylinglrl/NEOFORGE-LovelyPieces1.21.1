@@ -10,12 +10,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
@@ -29,7 +31,7 @@ public class SlimeEaterCurio extends UniversalCurio {
     private static final int COOLDOWN_TICKS = 20;
     private static final int SATURATION = 4;
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level3"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.slime_eater.des").withColor(ColorUtil.getRainbow(2f)));

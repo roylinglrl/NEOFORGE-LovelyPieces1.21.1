@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:moon_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:moonlight_bracelet"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ]
+}

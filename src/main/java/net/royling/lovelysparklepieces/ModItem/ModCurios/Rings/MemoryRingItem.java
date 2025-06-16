@@ -1,15 +1,15 @@
 package net.royling.lovelysparklepieces.ModItem.ModCurios.Rings;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
@@ -74,7 +74,7 @@ public class MemoryRingItem extends Item implements ICurioItem{
         }
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level6"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.lsp_memory_ring.basic").withColor(ColorUtil.getRainbow()));

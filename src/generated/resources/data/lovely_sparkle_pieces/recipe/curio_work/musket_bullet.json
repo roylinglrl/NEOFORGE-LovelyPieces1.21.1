@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:gunpowder"
+  },
+  "result": {
+    "count": 30,
+    "id": "lovely_sparkle_pieces:flintlock_bullet"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:iron_nugget"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ]
+}

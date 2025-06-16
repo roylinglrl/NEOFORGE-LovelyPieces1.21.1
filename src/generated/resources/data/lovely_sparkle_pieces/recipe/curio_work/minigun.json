@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:iron_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:minigun"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:dispenser"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:iron_bars"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

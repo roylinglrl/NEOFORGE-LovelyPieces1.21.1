@@ -25,6 +25,9 @@ public class ModCreative {
                 output.accept(ModCurios.CRUSH_STONE_RING.get().getDefaultInstance());
                 output.accept(ModCurios.INFERNO_RING.get().getDefaultInstance());
                 output.accept(ModCurios.ECO_RING.get().getDefaultInstance());
+                output.accept(ModCurios.PUREGOLD_RING.get().getDefaultInstance());
+                output.accept(ModCurios.BASTION_RING.get().getDefaultInstance());
+                output.accept(ModCurios.ROFAP.get().getDefaultInstance());
                 //首饰
                 output.accept(ModCurios.FPS_EYE.get().getDefaultInstance());
                 output.accept(ModCurios.BLACKSTONE_HEART.get().getDefaultInstance());
@@ -38,6 +41,8 @@ public class ModCreative {
                 output.accept(ModCurios.MARKSMAN_GOGGLES.get().getDefaultInstance());
                 output.accept(ModCurios.WITCH_HAT.get().getDefaultInstance());
                 output.accept(ModCurios.YELLOW_HEADSCARF.get().getDefaultInstance());
+                output.accept(ModCurios.BABY_FEEDER.get().getDefaultInstance());
+                output.accept(ModCurios.GILDED_PIPE.get().getDefaultInstance());
                 //胸饰
                 output.accept(ModCurios.HEAVY_BIGROCK.get().getDefaultInstance());
                 output.accept(ModCurios.POCKET_WATCH.get().getDefaultInstance());
@@ -46,14 +51,20 @@ public class ModCreative {
                 output.accept(ModCurios.GPS.get().getDefaultInstance());
                 output.accept(ModCurios.PDA.get().getDefaultInstance());
                 output.accept(ModCurios.UFFFD.get().getDefaultInstance());
+                output.accept(ModCurios.BONE_ARMOR.get().getDefaultInstance());
                 //背饰
                 output.accept(ModCurios.MERMAID_TAIL.get().getDefaultInstance());
+                output.accept(ModCurios.VOID_TENTACLES.get().getDefaultInstance());
                 output.accept(ModCurios.LEATHER_QUIVER.get().getDefaultInstance());
                 output.accept(ModCurios.WOOD_GRAIN_QUIVER.get().getDefaultInstance());
+                output.accept(ModCurios.GREAT_SHIFT.get().getDefaultInstance());
                 //腰带
                 output.accept(ModCurios.GOLDEN_HOOK.get().getDefaultInstance());
                 output.accept(ModCurios.ADVENTURER_BELT.get().getDefaultInstance());
                 output.accept(ModCurios.HIGH_QUALITY_FISHING_LINE.get().getDefaultInstance());
+                output.accept(ModCurios.AMULET_POUCH.get().getDefaultInstance());
+                output.accept(ModCurios.DOUBLE_HOOK.get().getDefaultInstance());
+                output.accept(ModCurios.FISHERMAN_TOOLBOX.get().getDefaultInstance());
                 //护符
                 output.accept(ModCurios.MAGMA_AMULET.get().getDefaultInstance());
                 output.accept(ModCurios.MOON_AMULET.get().getDefaultInstance());
@@ -62,8 +73,12 @@ public class ModCreative {
                 output.accept(ModCurios.MYSTERIOUS_GEL.get().getDefaultInstance());
                 output.accept(ModCurios.SLIME_EATER.get().getDefaultInstance());
                 output.accept(ModCurios.GLUTTONY_AMULET.get().getDefaultInstance());
+                output.accept(ModCurios.CREEPFEAR_AMULET.get().getDefaultInstance());
                 //手环
                 output.accept(ModCurios.RESUSCITATOR.get().getDefaultInstance());
+                output.accept(ModCurios.TWILIGHT_MOMENT.get().getDefaultInstance());
+                output.accept(ModCurios.MOONLIGHT_BRACELET.get().getDefaultInstance());
+                output.accept(ModCurios.VERSATILE_PERSON.get().getDefaultInstance());
                 //足部
                 output.accept(ModCurios.STRAW_SANDALS.get().getDefaultInstance());
                 output.accept(ModCurios.GOAT_BOOT.get().getDefaultInstance());
@@ -97,9 +112,13 @@ public class ModCreative {
                 output.accept(ModCurios.SOUL_MARK.get().getDefaultInstance());
                 output.accept(ModCurios.EMBER_CORE.get().getDefaultInstance());
                 output.accept(ModCurios.VALORANT.get().getDefaultInstance());
+                output.accept(ModCurios.DREAM_HEART.get().getDefaultInstance());
+                output.accept(ModCurios.DISASTER_EMBLEM.get().getDefaultInstance());
+                output.accept(ModCurios.THE_EVIL_CURSE.get().getDefaultInstance());
                 //物品
                 output.accept(ModItems.FLAME_STAFF.get().getDefaultInstance());
                 output.accept(ModItems.NECROPSYCHE_PAPILLON.get().getDefaultInstance());
+                output.accept(ModItems.ABIGAILS_FLOWER.get().getDefaultInstance());
                 output.accept(ModItems.FIREBALL_STAFF.get().getDefaultInstance());
                 output.accept(ModItems.PIRATE_SCIMITAR.get().getDefaultInstance());
                 output.accept(ModItems.FISH_AXE.get().getDefaultInstance());
@@ -121,12 +140,25 @@ public class ModCreative {
                 output.accept(ModItems.MINIGUN.get().getDefaultInstance());
                 output.accept(ModItems.HKMP7.get().getDefaultInstance());
                 output.accept(ModItems.FLINTLOCK_BULLET.get().getDefaultInstance());
+                output.accept(ModItems.HELL_FIRE.get().getDefaultInstance());
+                output.accept(ModItems.SPARKLE_SHARD.get().getDefaultInstance());
+                output.accept(ModItems.MOON_INGOT.get().getDefaultInstance());
                 //方块
                 output.accept(ModBlocks.SOUL_LIGHT_ITEM.get().getDefaultInstance());
                 output.accept(ModBlocks.MOLTEN_STONE_ITEM.get().getDefaultInstance());
                 output.accept(ModBlocks.MOLTEN_DIRT_ITEM.get().getDefaultInstance());
                 output.accept(ModBlocks.BLAST_ABSORBER_ITEM.get().getDefaultInstance());
                 output.accept(ModBlocks.CURIO_WORKBENCH_ITEM.get().getDefaultInstance());
+                output.accept(ModBlocks.MOONSTONE_ITEM.get().getDefaultInstance());
+                output.accept(ModBlocks.WILDFIRE_PORTAL_ITEM.get().getDefaultInstance());
+                output.accept(ModBlocks.LAB_RUSTY_PLATE_ITEM2.get().getDefaultInstance());
+                output.accept(ModBlocks.LAB_BAW_FLOOR_ITEM.get().getDefaultInstance());
+                output.accept(ModBlocks.LAB_RUSTY_PLATE_ITEM.get().getDefaultInstance());
+
+
+                output.accept(ModItems.LUCY_AXE.get().getDefaultInstance());
+                output.accept(ModItems.GRAVEDIGGER.get().getDefaultInstance());
+                output.accept(ModItems.DEATH_HOOK.get().getDefaultInstance());
 
 
             }).build());

@@ -5,7 +5,9 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class CapitalistCake extends Item {
         ));
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level4"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.capitalist_cake.des").withColor(ColorUtil.getRainbow(2f)));

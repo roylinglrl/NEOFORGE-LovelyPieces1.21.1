@@ -1,0 +1,36 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:leather_quiver"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:wood_grain_quiver"
+  },
+  "secondary": [
+    {
+      "tag": "minecraft:logs"
+    },
+    {
+      "tag": "minecraft:logs"
+    },
+    {
+      "item": "minecraft:fletching_table"
+    },
+    {
+      "item": "minecraft:spectral_arrow"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ]
+}

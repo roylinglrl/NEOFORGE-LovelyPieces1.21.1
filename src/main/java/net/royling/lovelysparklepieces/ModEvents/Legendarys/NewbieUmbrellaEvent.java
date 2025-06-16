@@ -60,10 +60,7 @@ public class NewbieUmbrellaEvent {
     public static void onPlayerDrops(LivingDropsEvent event) {
         if (event.getEntity() instanceof Player player) {
             if (ITEM_CACHE.containsKey(player.getUUID())) {
-                // 清空所有掉落物
                 event.getDrops().clear();
-                // 清空玩家背包（避免原版逻辑生成掉落）
-                //player.getInventory().clearContent();
             }
         }
     }
@@ -72,19 +69,15 @@ public class NewbieUmbrellaEvent {
         Player player = event.getEntity();
         ItemListHolder cache = ITEM_CACHE.remove(player.getUUID());
         if (cache != null) {
-            // 恢复主背包
             for (int i = 0; i < cache.mainInventory.size(); i++) {
                 player.getInventory().items.set(i, cache.mainInventory.get(i));
             }
-            // 恢复护甲
             for (int i = 0; i < cache.armorInventory.size(); i++) {
                 player.getInventory().armor.set(i, cache.armorInventory.get(i));
             }
-            // 恢复副手
             for (int i = 0; i < cache.offhandInventory.size(); i++) {
                 player.getInventory().offhand.set(i, cache.offhandInventory.get(i));
             }
-            // 恢复Curios物品
             CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
                 cache.curiosSlots.forEach((slotId, items) -> {
                     ICurioStacksHandler slot = handler.getCurios().get(slotId);

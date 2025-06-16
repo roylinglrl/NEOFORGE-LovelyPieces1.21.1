@@ -1,26 +1,18 @@
 package net.royling.lovelysparklepieces.ModItem.ModCurios.boot;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
-import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ModBlock.ModBlocks;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.ArrayDeque;
@@ -64,7 +56,7 @@ public class RollerSkatesItem extends UniversalCurio {
         }
         return true;
     }
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level1"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.icewalk.des").withColor(ColorUtil.getRainbow()));

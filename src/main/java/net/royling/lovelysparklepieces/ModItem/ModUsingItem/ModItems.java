@@ -14,6 +14,9 @@ import net.royling.lovelysparklepieces.ModItem.ModUsingItem.Gun.FlintlockBulletI
 import net.royling.lovelysparklepieces.ModItem.ModUsingItem.Gun.DemonBreakingSilverHunter;
 import net.royling.lovelysparklepieces.ModItem.ModUsingItem.Gun.HKMP7Item;
 import net.royling.lovelysparklepieces.ModItem.ModUsingItem.Gun.MiniGunItem;
+import net.royling.lovelysparklepieces.ModItem.ModUsingItem.MetalWeapon.DeathHook;
+import net.royling.lovelysparklepieces.ModItem.ModUsingItem.MetalWeapon.GravediggersShovel;
+import net.royling.lovelysparklepieces.ModItem.ModUsingItem.MetalWeapon.LucyAxe;
 import net.royling.lovelysparklepieces.ModSounds.ModSounds;
 
 import java.util.function.Supplier;
@@ -84,7 +87,22 @@ public class ModItems {
             ()->new FlintlockBulletItem(new Item.Properties()));
     public static final Supplier<Item> CAPITALIST_CAKE = ITEMS.register("capitalist_cake",
             ()->new CapitalistCake(new Item.Properties()));
+    public static final Supplier<Item> HELL_FIRE = ITEMS.register("hell_fire",
+            ()->new Hellfire(new Item.Properties().attributes(SwordItem.createAttributes(PIRATE_SCIMITAR_TIRE,1,-2.4f))));
 
+    public static final Supplier<Item> SPARKLE_SHARD = ITEMS.register("sparkle_shard",
+            ()->new Item(new Item.Properties()));
+    public static final Supplier<Item> MOON_INGOT = ITEMS.register("moon_ingot",
+            ()->new Item(new Item.Properties()));
+    public static final Supplier<Item> LUCY_AXE = ITEMS.register("lucy_axe",
+            LucyAxe::new);
+    public static final Supplier<Item> GRAVEDIGGER = ITEMS.register("gravedigger_shovel",
+            GravediggersShovel::new);
+    public static final Supplier<Item> DEATH_HOOK = ITEMS.register("death_hook",
+            DeathHook::new);
+
+    public static final Supplier<Item> ABIGAILS_FLOWER = ITEMS.register("abigails_flower",
+            ()->new AbigailsFlower(new Item.Properties()));
 
 
     public static Supplier<Item> registerItem(String id){

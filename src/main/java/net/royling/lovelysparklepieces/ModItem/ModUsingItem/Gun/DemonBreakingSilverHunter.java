@@ -12,7 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ModEntity.Bullet.BulletEntity;
 import net.royling.lovelysparklepieces.ModItem.ModDataComponents.DBSHCountData;
 import net.royling.lovelysparklepieces.ModItem.ModDataComponents.ModDataComponents;
@@ -57,7 +59,6 @@ public class DemonBreakingSilverHunter extends GunItem {
                     break;
                 }
             }
-
             // 如果快捷栏没有，检查背包剩余部分 (9-35)
             if (!hasBullet) {
                 for (int i = 9; i < player.getInventory().getContainerSize(); i++) {
@@ -84,15 +85,6 @@ public class DemonBreakingSilverHunter extends GunItem {
                 bulletDamageType = BulletEntity.BulletDamageType.SILVER;
             }
             BulletEntity bullet = new BulletEntity(level, player,getShootDamage(), bulletDamageType);
-            Vec3 lookVec = player.getLookAngle();
-            Vec3 upVec = new Vec3(0, 1, 0);
-            Vec3 rightVec = lookVec.cross(upVec).normalize().scale(0.3);
-
-            bullet.setPos(
-                    bullet.getX() + rightVec.x,
-                    bullet.getY() + rightVec.y,
-                    bullet.getZ() + rightVec.z
-            );
             float angle = 1.4f;
             bullet.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, angle);
             level.addFreshEntity(bullet);
@@ -114,7 +106,7 @@ public class DemonBreakingSilverHunter extends GunItem {
         }
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level2").withColor(ColorUtil.getRainbow(2f)));

@@ -15,6 +15,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModBlock.CurioWorkbench.CurioWorkbench;
 
 import java.util.function.Supplier;
 
@@ -78,10 +79,31 @@ public class ModBlocks {
     );
     public static final Supplier<Block> CURIO_WORKBENCH = BLOCKS.register(
             "curio_workbench",
-            ()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK))
+            ()->new CurioWorkbench(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK))
     );
     public static final Supplier<Item> CURIO_WORKBENCH_ITEM = BLOCK_ITEMS.register(
             "curio_workbench",()->new BlockItem(CURIO_WORKBENCH.get(),new Item.Properties())
     );
-
+    public static final Supplier<Block> MOONSTONE = BLOCKS.register(
+            "moonstone", MoonstoneBlock::new
+    );
+    public static final Supplier<Item> MOONSTONE_ITEM = BLOCK_ITEMS.register(
+            "moonstone",()->new BlockItem(MOONSTONE.get(),new Item.Properties())
+    );
+    public static final Supplier<Block> WILDFIRE_PORTAL = BLOCKS.register("wildfire_portal",
+            () -> new WildfirePortalBlock(BlockBehaviour.Properties.of()));
+    public static final Supplier<Item> WILDFIRE_PORTAL_ITEM = BLOCK_ITEMS.register(
+            "wildfire_portal",()->new BlockItem(WILDFIRE_PORTAL.get(),new Item.Properties()));
+    public static final Supplier<Block> LAB_RUSTY_PLATE = BLOCKS.register("labblock_rusty_plate",
+            () -> new Block(BlockBehaviour.Properties.of().strength(3.5f).explosionResistance(15)));
+    public static final Supplier<Item> LAB_RUSTY_PLATE_ITEM = BLOCK_ITEMS.register(
+            "labblock_rusty_plate",()->new BlockItem(LAB_RUSTY_PLATE.get(),new Item.Properties()));
+    public static final Supplier<Block> LAB_RUSTY_PLATE2 = BLOCKS.register("labblock_rusty_plate2",
+            () -> new Block(BlockBehaviour.Properties.of().strength(3.5f).explosionResistance(15)));
+    public static final Supplier<Item> LAB_RUSTY_PLATE_ITEM2 = BLOCK_ITEMS.register(
+            "labblock_rusty_plate2",()->new BlockItem(LAB_RUSTY_PLATE2.get(),new Item.Properties()));
+    public static final Supplier<Block> LAB_BAW_FLOOR = BLOCKS.register("labblock_baw_floor",
+            () -> new Block(BlockBehaviour.Properties.of().strength(3.5f).explosionResistance(15)));
+    public static final Supplier<Item> LAB_BAW_FLOOR_ITEM = BLOCK_ITEMS.register(
+            "labblock_baw_floor",()->new BlockItem(LAB_BAW_FLOOR.get(),new Item.Properties()));
 }

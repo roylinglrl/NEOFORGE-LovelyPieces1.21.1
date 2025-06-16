@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:fishing_rod"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:fish_double_hook"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:lead"
+    },
+    {
+      "item": "minecraft:rabbit_foot"
+    }
+  ]
+}

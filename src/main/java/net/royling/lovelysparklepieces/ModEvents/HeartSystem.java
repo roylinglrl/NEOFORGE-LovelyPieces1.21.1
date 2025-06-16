@@ -5,13 +5,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerHeart;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerSoul;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.PlayerHeart;
 
 import java.util.Random;
 
@@ -31,6 +31,7 @@ public class HeartSystem {
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Pre  event){
         Player player = event.getEntity();
+        Level level = event.getEntity().level();
         if(player.level().isClientSide)return;
         if(player.tickCount%20!=0)return;
 

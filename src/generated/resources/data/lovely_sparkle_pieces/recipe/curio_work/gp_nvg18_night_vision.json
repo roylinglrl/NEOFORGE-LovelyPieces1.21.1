@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:double_night_vision"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:quarter_night_vision"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:spyglass"
+    },
+    {
+      "item": "minecraft:spyglass"
+    },
+    {
+      "item": "minecraft:glass_pane"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:glowstone"
+    }
+  ]
+}

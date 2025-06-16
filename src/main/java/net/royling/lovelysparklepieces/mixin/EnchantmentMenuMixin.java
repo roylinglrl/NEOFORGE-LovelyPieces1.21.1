@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.royling.lovelysparklepieces.ModEnchantment.ModEnchantments;
 import net.royling.lovelysparklepieces.PlayerData.SoulData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -61,12 +62,22 @@ public abstract class EnchantmentMenuMixin {
                 .registryOrThrow(Registries.ENCHANTMENT);
         if (boostedLevel>=30){
             float random1 = this.random.nextFloat();
-            if(random1<0.5f){
+            if(random1<0.15f){
                 boolean hasMending = list.stream().anyMatch(e->e.enchantment== Enchantments.MENDING);
                 if(!hasMending){
                     Holder<Enchantment> mendingHolder = enchantRegistry.getHolderOrThrow(Enchantments.MENDING);
                     if(mendingHolder.value().canEnchant(stack)){
                         list.add(new EnchantmentInstance(mendingHolder,1));
+                    }
+                }
+            }
+            float random2 = this.random.nextFloat();
+            if(random2<0.2f){
+                boolean hasMending = list.stream().anyMatch(e->e.enchantment== ModEnchantments.LIGHT_STRIKER);
+                if(!hasMending){
+                    Holder<Enchantment> mendingHolder = enchantRegistry.getHolderOrThrow(ModEnchantments.LIGHT_STRIKER);
+                    if(mendingHolder.value().canEnchant(stack)){
+                        list.add(new EnchantmentInstance(mendingHolder,4));
                     }
                 }
             }

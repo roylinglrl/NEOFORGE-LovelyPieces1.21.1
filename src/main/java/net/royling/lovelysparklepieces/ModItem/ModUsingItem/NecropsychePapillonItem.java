@@ -1,6 +1,5 @@
 package net.royling.lovelysparklepieces.ModItem.ModUsingItem;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -13,11 +12,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ModEntity.ModEntities;
 import net.royling.lovelysparklepieces.ModEntity.Butterfly.SoulButterflyEntity;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
-import net.royling.lovelysparklepieces.PlayerData.SoulData;
 
 import java.util.List;
 
@@ -86,7 +86,7 @@ public class NecropsychePapillonItem extends Item {
         }
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level12").withColor(ColorUtil.getRainbow(2f)));

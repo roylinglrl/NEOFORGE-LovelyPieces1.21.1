@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:paper"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:gamblers_poker"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:ink_sac"
+    },
+    {
+      "item": "minecraft:red_dye"
+    },
+    {
+      "item": "minecraft:black_dye"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    },
+    {
+      "item": "minecraft:clock"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

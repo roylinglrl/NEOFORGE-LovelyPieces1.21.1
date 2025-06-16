@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:blaze_rod"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:blaze_core"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "minecraft:nether_brick"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    }
+  ]
+}

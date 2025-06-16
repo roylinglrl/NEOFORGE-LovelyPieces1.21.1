@@ -14,4 +14,7 @@ public class ModMobEffects {
             DeferredRegister.create(Registries.MOB_EFFECT, LovelySparklePieces.MODID);
     public static final Holder<MobEffect> OVERHEAT_EFFECT = MOB_EFFECTS.register("overheat",
             () -> new OverheatEffect(MobEffectCategory.HARMFUL, 0xFF0000));
+    public static final Holder<MobEffect> SPELL_SURGE = MOB_EFFECTS.register("spell_surge",
+            () -> new SpellSurgeEffect(MobEffectCategory.BENEFICIAL, 0x0080FF));
+
 }

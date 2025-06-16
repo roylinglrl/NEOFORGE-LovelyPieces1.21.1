@@ -17,7 +17,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModEvents.Legendarys.BCEvents;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
@@ -32,7 +34,7 @@ public class EmberCoreItem extends UniversalCurio {
         super(properties.stacksTo(1));
     }
     public static final float DAMAGE_RADIUS = 3.0f;
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level4"));

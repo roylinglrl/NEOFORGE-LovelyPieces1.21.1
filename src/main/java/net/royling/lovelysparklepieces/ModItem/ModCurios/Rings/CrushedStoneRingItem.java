@@ -2,7 +2,6 @@ package net.royling.lovelysparklepieces.ModItem.ModCurios.Rings;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -12,7 +11,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
@@ -34,7 +35,7 @@ public class CrushedStoneRingItem extends UniversalCurio {
                 ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"crush_stone_ring"),SPEED, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifiers;
     }
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level2"));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.crush_stone.basic").withColor(ColorUtil.getRainbow()));

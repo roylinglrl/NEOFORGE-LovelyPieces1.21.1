@@ -1,0 +1,21 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:gold_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:disaster_emblem"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

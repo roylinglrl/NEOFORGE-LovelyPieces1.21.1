@@ -2,20 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "B": {
-      "item": "minecraft:blaze_rod"
-    },
-    "F": {
+    "C": {
       "item": "lovely_sparkle_pieces:polymerization"
     },
-    "N": {
-      "item": "minecraft:netherite_ingot"
+    "D": {
+      "item": "minecraft:diamond"
     }
   },
   "pattern": [
-    "BNB",
-    "NFN",
-    "BNB"
+    "DDD",
+    "DCD",
+    "DDD"
   ],
   "result": {
     "count": 1,

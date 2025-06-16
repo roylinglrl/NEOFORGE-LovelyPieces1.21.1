@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_multi_tool": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lovely_sparkle_pieces:multi_purpose_tool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lovely_sparkle_pieces:curio_workbench_crafting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_multi_tool"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lovely_sparkle_pieces:curio_workbench_crafting"
+    ]
+  }
+}

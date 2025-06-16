@@ -1,0 +1,21 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:dirt"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:the_evil_curse"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:dirt"
+    },
+    {
+      "item": "minecraft:dirt"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

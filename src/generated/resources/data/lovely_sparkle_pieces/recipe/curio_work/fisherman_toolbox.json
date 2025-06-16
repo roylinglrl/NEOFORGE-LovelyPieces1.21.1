@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:chest"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:fisherman_toolbox"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:golden_hook"
+    },
+    {
+      "item": "lovely_sparkle_pieces:fish_double_hook"
+    },
+    {
+      "item": "lovely_sparkle_pieces:high_quality_fishing_line"
+    },
+    {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:polymerization"
+    }
+  ]
+}

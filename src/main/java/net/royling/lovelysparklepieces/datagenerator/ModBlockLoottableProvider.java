@@ -19,6 +19,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.royling.lovelysparklepieces.ModBlock.ModBlocks;
+import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -40,6 +41,10 @@ public class ModBlockLoottableProvider extends BlockLootSubProvider {
         dropOther(ModBlocks.SOUL_LIGHT.get(), Items.AIR);
         dropOther(ModBlocks.FLAT_ICE.get(), Items.AIR);
         dropOther(ModBlocks.SOLID_ICE.get(), Items.AIR);
+        this.add(ModBlocks.MOONSTONE.get(),block -> createOreDrop(block,ModItems.SPARKLE_SHARD.get()));
+        dropSelf(ModBlocks.LAB_BAW_FLOOR.get());
+        dropSelf(ModBlocks.LAB_RUSTY_PLATE2.get());
+        dropSelf(ModBlocks.LAB_RUSTY_PLATE.get());
     }
 
     @Override

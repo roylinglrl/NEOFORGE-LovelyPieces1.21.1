@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:string"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:high_quality_fishing_line"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ]
+}

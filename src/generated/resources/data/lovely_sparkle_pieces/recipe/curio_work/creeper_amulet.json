@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:obsidian"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:creepfear_amulet"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:obsidian"
+    },
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ]
+}

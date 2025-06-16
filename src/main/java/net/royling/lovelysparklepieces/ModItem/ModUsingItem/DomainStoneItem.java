@@ -1,10 +1,7 @@
 package net.royling.lovelysparklepieces.ModItem.ModUsingItem;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,20 +19,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerSoul;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerUsingItemData;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.PlayerUsingItemData;
 import net.royling.lovelysparklepieces.ModItem.ModDataComponents.BoundaryStoneData;
 import net.royling.lovelysparklepieces.ModItem.ModDataComponents.ModDataComponents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 public class DomainStoneItem extends Item {
     public DomainStoneItem(Properties properties) {
@@ -123,7 +118,7 @@ public class DomainStoneItem extends Item {
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) { return UseAnim.BOW; }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level8"));

@@ -1,21 +1,19 @@
 package net.royling.lovelysparklepieces.ModItem.ModCurios.Legendary;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.neoforged.fml.common.Mod;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ModEvents.Legendarys.BCEvents;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class SoulQuiverItem extends UniversalCurio {
         return CuriosApi.getCuriosInventory(player).flatMap(inv->inv.findFirstCurio(ModCurios.SOUL_QUIVER.get())).isPresent();
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
         tooltip.add(Component.translatable("tooltip.lovely_sparkle_pieces.level8"));
         tooltip.add(Component.translatable("tooltip.lovelysparklepieces.soul_quiver.equip_requirement").withColor(ColorUtil.getRainbow()));

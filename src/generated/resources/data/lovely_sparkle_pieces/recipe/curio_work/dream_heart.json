@@ -1,0 +1,24 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:white_bed"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:dream_heart"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

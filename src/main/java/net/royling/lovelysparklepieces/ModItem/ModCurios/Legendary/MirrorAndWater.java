@@ -14,6 +14,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
@@ -38,7 +40,7 @@ public class MirrorAndWater extends UniversalCurio {
                 ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"bc_armor"),-0.000000000001, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         return modifiers;
     }
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level12"));
         if(!Screen.hasShiftDown()){

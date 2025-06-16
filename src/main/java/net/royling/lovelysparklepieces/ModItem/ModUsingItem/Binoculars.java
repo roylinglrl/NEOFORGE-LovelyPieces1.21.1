@@ -1,6 +1,5 @@
 package net.royling.lovelysparklepieces.ModItem.ModUsingItem;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -9,7 +8,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class Binoculars extends Item {
         super.releaseUsing(stack, level, livingEntity, timeCharged);
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.binoculars").withColor(ColorUtil.getRainbow()));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.binoculars2").withColor(ColorUtil.getRainbow()));

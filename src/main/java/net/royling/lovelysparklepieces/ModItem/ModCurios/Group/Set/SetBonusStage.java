@@ -2,6 +2,8 @@ package net.royling.lovelysparklepieces.ModItem.ModCurios.Group.Set;
 
 import net.minecraft.world.entity.player.Player;
 
+import java.util.List;
+
 public interface  SetBonusStage {
     int requiredCount(); // 达成这个阶段需要的物品数量
 
@@ -11,5 +13,5 @@ public interface  SetBonusStage {
 
     void onDeactivated(Player player);
 
-    String tooltip();
+    List<String> tooltip();
 }

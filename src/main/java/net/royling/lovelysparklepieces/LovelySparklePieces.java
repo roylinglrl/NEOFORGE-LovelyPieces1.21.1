@@ -1,14 +1,26 @@
 package net.royling.lovelysparklepieces;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.EnderpearlItem;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.royling.lovelysparklepieces.ClientEvent.*;
-import net.royling.lovelysparklepieces.ClientEvent.Particle.DamageNumberParticle;
-import net.royling.lovelysparklepieces.ClientEvent.Particle.ModParticles;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.royling.lovelysparklepieces.ModBlock.CurioWorkbench.CurioWorkScreen;
+import net.royling.lovelysparklepieces.ModBlock.ModBlockEntities;
+import net.royling.lovelysparklepieces.ModBlock.ModMenuType;
+import net.royling.lovelysparklepieces.ModEnchantment.ModEnchantEffects;
+import net.royling.lovelysparklepieces.ModEnchantment.ModEnchantments;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.*;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.Particle.DamageNumberParticle;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.Particle.ModParticles;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModBlock.ModBlocks;
 import net.royling.lovelysparklepieces.ModCommand.ModCommands;
@@ -20,23 +32,24 @@ import net.royling.lovelysparklepieces.ModEvents.Gamblers.GamblersEvents;
 import net.royling.lovelysparklepieces.ModEvents.HeartSystem;
 import net.royling.lovelysparklepieces.ModEvents.Legendarys.*;
 import net.royling.lovelysparklepieces.ModEvents.necklace.LavaDefance;
+import net.royling.lovelysparklepieces.ModFeature.ModFeatures;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
-
 import net.royling.lovelysparklepieces.ModEvents.PlayerDamageModifierEvent;
 import net.royling.lovelysparklepieces.ModEvents.PlayerJoinHandler;
 import net.royling.lovelysparklepieces.ModEvents.boot.DoubleJumpEvent;
 import net.royling.lovelysparklepieces.ModEvents.boot.SteelBoot;
+import net.royling.lovelysparklepieces.ModItem.ModCurios.Rings.RingOfFavorAndProtection;
 import net.royling.lovelysparklepieces.ModItem.ModCuriosRender.MagmaAmuletRender;
 import net.royling.lovelysparklepieces.ModItem.ModCuriosRender.WitchHatRender;
 import net.royling.lovelysparklepieces.ModItem.ModDataComponents.ModDataComponents;
 import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
+import net.royling.lovelysparklepieces.ModRecipe.ModRecipe;
+import net.royling.lovelysparklepieces.ModRecipe.ModSerializers;
 import net.royling.lovelysparklepieces.ModSounds.ModSounds;
 import net.royling.lovelysparklepieces.PlayerData.ChipsData;
 import net.royling.lovelysparklepieces.PlayerData.SoulData;
 import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -59,7 +72,6 @@ public class LovelySparklePieces
     public static ResourceLocation resLoc(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
-
     public LovelySparklePieces(IEventBus modEventBus, ModContainer modContainer)
     {
         modContainer.registerConfig(ModConfig.Type.COMMON,LSPConfig.SPEC);
@@ -78,7 +90,13 @@ public class LovelySparklePieces
         ModDataComponents.register(modEventBus);
         ModMobEffects.MOB_EFFECTS.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
+        ModFeatures.FEATURES.register(modEventBus);
         ModCurios.STRANGE_ITEMS.register(modEventBus);
+        ModEnchantEffects.ENTITY_ENCHANTMENTS.register(modEventBus);
+        ModRecipe.RECIPE_TYPES.register(modEventBus);
+        ModSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ModMenuType.MENUS.register(modEventBus);
+        ModBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(PlayerJoinHandler.class);
         NeoForge.EVENT_BUS.register(SoulData.class);
@@ -131,13 +149,19 @@ public class LovelySparklePieces
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+
             event.enqueueWork(()->{
                 Minecraft.getInstance().particleEngine.register(
                         ModParticles.DAMAGE_NUMBER_PARTICLE.get(), new DamageNumberParticle.Provider()
                 );
+
             });
             CuriosRendererRegistry.register(ModCurios.MAGMA_AMULET.get(), MagmaAmuletRender::new);
             CuriosRendererRegistry.register(ModCurios.WITCH_HAT.get(), WitchHatRender::new);
+        }
+        @SubscribeEvent
+        private static void registerScreens(RegisterMenuScreensEvent event){
+            event.register(ModMenuType.CURIO_WORK_MENU.get(), CurioWorkScreen::new);
         }
     }
 

@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:puregold_ring"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:bastion_ring"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "minecraft:blackstone"
+    },
+    {
+      "item": "minecraft:blackstone"
+    },
+    {
+      "item": "minecraft:gilded_blackstone"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:cooked_porkchop"
+    },
+    {
+      "item": "minecraft:crying_obsidian"
+    }
+  ]
+}

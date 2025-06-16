@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:golden_apple"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:resuscitator"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:rose_bush"
+    }
+  ]
+}

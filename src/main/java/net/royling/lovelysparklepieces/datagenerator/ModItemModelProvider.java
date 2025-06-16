@@ -50,6 +50,10 @@ public class ModItemModelProvider extends ItemModelProvider{
         basicItem(ModCurios.CRUSH_STONE_RING.get());
         basicItem(ModCurios.INFERNO_RING.get());
         basicItem(ModCurios.ECO_RING.get());
+        basicItem(ModCurios.BONE_ARMOR.get());
+        basicItem(ModCurios.VOID_TENTACLES.get());
+        basicItem(ModCurios.DISASTER_EMBLEM.get());
+        basicItem(ModCurios.THE_EVIL_CURSE.get());
 
         basicItem(ModCurios.NIGHT_VISION.get());
         basicItem(ModCurios.JELLYFISH_HELMET.get());
@@ -86,7 +90,20 @@ public class ModItemModelProvider extends ItemModelProvider{
         basicItem(ModCurios.EMBER_CORE.get());
         basicItem(ModCurios.SOUL_MARK.get());
         basicItem(ModCurios.VALORANT.get());
-
+        basicItem(ModCurios.PUREGOLD_RING.get());
+        basicItem(ModCurios.BASTION_RING.get());
+        basicItem(ModCurios.CREEPFEAR_AMULET.get());
+        basicItem(ModCurios.BABY_FEEDER.get());
+        basicItem(ModCurios.GILDED_PIPE.get());
+        basicItem(ModCurios.AMULET_POUCH.get());
+        basicItem(ModCurios.FISHERMAN_TOOLBOX.get());
+        basicItem(ModCurios.DOUBLE_HOOK.get());
+        basicItem(ModCurios.GREAT_SHIFT.get());
+        basicItem(ModCurios.DREAM_HEART.get());
+        basicItem(ModCurios.ROFAP.get());
+        basicItem(ModCurios.TWILIGHT_MOMENT.get());
+        basicItem(ModCurios.MOONLIGHT_BRACELET.get());
+        basicItem(ModCurios.VERSATILE_PERSON.get());
         //
         handheldItem(ModItems.SOUL_TORCH.get());
         handheldItem(ModItems.NECROPSYCHE_PAPILLON.get());
@@ -100,12 +117,17 @@ public class ModItemModelProvider extends ItemModelProvider{
         handheldItem(ModItems.FISH_AXE.get());
         handheldItem(ModItems.FISH_PICKAXE.get());
         handheldItem(ModItems.FISH_SHOVEL.get());
+        handheldItem(ModItems.HELL_FIRE.get());
+        handheldItem(ModItems.LUCY_AXE.get());
+        handheldItem(ModItems.GRAVEDIGGER.get());
         basicItem(ModItems.MOJA_COLA.get());
         basicItem(ModItems.FLINTLOCK_BULLET.get());
         basicItem(ModItems.BATTERY.get());
         basicItem(ModItems.INFINITE_APPLE.get());
         basicItem(ModItems.MULTI_PURPOSE_TOOL.get());
         basicItem(ModItems.CAPITALIST_CAKE.get());
-
+        basicItem(ModItems.SPARKLE_SHARD.get());
+        basicItem(ModItems.MOON_INGOT.get());
+        basicItem(ModItems.ABIGAILS_FLOWER.get());
     }
 }

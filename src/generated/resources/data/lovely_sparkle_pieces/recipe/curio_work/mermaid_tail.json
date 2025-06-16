@@ -1,0 +1,36 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:prismarine_shard"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:mermaid_tail"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:turtle_scute"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:cod"
+    },
+    {
+      "item": "minecraft:salmon"
+    },
+    {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    {
+      "item": "minecraft:kelp"
+    },
+    {
+      "item": "minecraft:nautilus_shell"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ]
+}

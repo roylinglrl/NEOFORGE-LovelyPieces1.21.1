@@ -36,7 +36,7 @@ public abstract class FishingHookMixin {
     private void onFishingTick(CallbackInfo ci, Player player, float f, BlockPos blockpos, FluidState fluidstate, boolean flag, Vec3 vec3, double d0) {
         if (((Entity) (Object) this).level().isClientSide) return;
         if (player != null) {
-            if (ModCurios.hasCurio(player, ModCurios.HIGH_QUALITY_FISHING_LINE.get())) {
+            if (ModCurios.hasCurio(player, ModCurios.HIGH_QUALITY_FISHING_LINE.get())||ModCurios.hasCurio(player,ModCurios.FISHERMAN_TOOLBOX.get())) {
                 if (player.getRandom().nextFloat() < 0.2F) {
                     if (this.timeUntilHooked > 0) {
                         this.timeUntilHooked--;

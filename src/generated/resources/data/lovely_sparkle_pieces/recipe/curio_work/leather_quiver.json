@@ -1,0 +1,36 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:leather"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:leather_quiver"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ]
+}

@@ -110,6 +110,8 @@ dependencies {
     implementation "curse.maven:item-borders-513769:5591010"
     implementation "curse.maven:iceberg-520110:6423863"
     implementation "curse.maven:prism-lib-638111:6372979"
+    implementation "curse.maven:journeymap-32274:6550378"
+
 
     //implementation "curse.maven:lush-scented-paradise-1210484:6322326"
 }

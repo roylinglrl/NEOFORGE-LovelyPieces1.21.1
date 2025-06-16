@@ -35,9 +35,7 @@ public class SoulButterflyEntity extends PathfinderMob {
     private int retryTimer = 0;
     private LivingEntity attackTarget;
     public static final double ATTACK_RANGE = 16.0;
-    public static final double ATTACK_SPEED = 1.5;
     public int attackCooldown = 0;
-    public static final int MAGIC_DAMAGE = 8;
     public SoulButterflyEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
     }
@@ -133,7 +131,6 @@ public class SoulButterflyEntity extends PathfinderMob {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10,true,false,entity->entity instanceof Enemy));
         this.goalSelector.addGoal(2, new SoulButterflyAttackGoal(this, 8d));
         this.goalSelector.addGoal(3,new SoulButterflyFollowOwnerGoal(this,5d));
-
     }
     public void teleportTo(double x, double y, double z) {
         // 强制设置位置并重置运动
@@ -217,8 +214,6 @@ public class SoulButterflyEntity extends PathfinderMob {
                 .add(Attributes.MOVEMENT_SPEED, 2.2)
                 .add(Attributes.FLYING_SPEED,3)
                 .add(Attributes.ATTACK_DAMAGE,8);
-
-
     }
     public boolean isFlying() {
         return !this.onGround(); // 简单状态判断

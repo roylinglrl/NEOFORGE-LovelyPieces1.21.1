@@ -1,0 +1,24 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:blaze_rod"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:fireball_staff"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

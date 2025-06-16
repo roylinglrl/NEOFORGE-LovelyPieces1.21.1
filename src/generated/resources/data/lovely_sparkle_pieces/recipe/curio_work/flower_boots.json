@@ -1,0 +1,21 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:straw_sandals"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:flower_boot"
+  },
+  "secondary": [
+    {
+      "tag": "minecraft:small_flowers"
+    },
+    {
+      "tag": "minecraft:small_flowers"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

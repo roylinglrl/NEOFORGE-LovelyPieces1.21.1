@@ -1,5 +1,6 @@
 package net.royling.lovelysparklepieces.ModItem.ModDataComponents;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -17,8 +18,6 @@ public class ModDataComponents {
                             .persistent(BoundaryStoneData.CODEC)
                             .networkSynchronized(BoundaryStoneData.STREAM_CODEC)
                             .build());
-
-
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<EnergyComponent>> ENERGY =
             DATA_COMPONENT_TYPES.register("energy",()->
                     DataComponentType.<EnergyComponent>builder()
@@ -37,6 +36,12 @@ public class ModDataComponents {
                     DataComponentType.<ShootCDData>builder()
                             .persistent(ShootCDData.CODEC)
                             .networkSynchronized(ShootCDData.STREAM_CODEC)
+                            .build());
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<BoneArmorComponent>> BONE_ARMOR =
+            DATA_COMPONENT_TYPES.register("bone_armor",()->
+                    DataComponentType.<BoneArmorComponent>builder()
+                            .persistent(BoneArmorComponent.CODEC)
+                            .networkSynchronized(BoneArmorComponent.STREAM_CODEC)
                             .build());
 
     public static void register(IEventBus eventBus) {

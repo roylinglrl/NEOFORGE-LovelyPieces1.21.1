@@ -1,0 +1,33 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:iron_sword"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:death_hook"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:iron_bars"
+    },
+    {
+      "item": "minecraft:sunflower"
+    },
+    {
+      "item": "minecraft:bone_block"
+    },
+    {
+      "item": "minecraft:soul_torch"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

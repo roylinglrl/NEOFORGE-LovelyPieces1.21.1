@@ -1,0 +1,21 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:straw_sandals"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:cat_boot"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "item": "minecraft:cod"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

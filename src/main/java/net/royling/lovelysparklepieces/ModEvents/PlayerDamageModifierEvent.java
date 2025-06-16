@@ -1,12 +1,10 @@
 package net.royling.lovelysparklepieces.ModEvents;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EntityTypeTags;
@@ -17,26 +15,20 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.royling.lovelysparklepieces.ClientEvent.DamageParticlePacket;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerSoul;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.DamageParticlePacket;
 import net.royling.lovelysparklepieces.ModAttributes.ModAttribute;
 import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModEffect.ModMobEffects;
@@ -47,10 +39,9 @@ import net.royling.lovelysparklepieces.PlayerData.TemperatureData;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.util.Map.entry;
+import static net.minecraft.world.level.storage.loot.parameters.LootContextParams.EXPLOSION_RADIUS;
 
 public class PlayerDamageModifierEvent {
 
@@ -88,25 +79,19 @@ public class PlayerDamageModifierEvent {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onLivingHurt(LivingDamageEvent.Pre event) {
-        // 获取造成伤害的实体（来源实体和直接实体）
         Entity source = event.getSource().getEntity();
         Entity direct = event.getSource().getDirectEntity();
         LivingEntity target = event.getEntity();
-        // 判断是否由玩家造成伤害
         Player player = null;
         if (source instanceof Player) {
             player = (Player) source;
         } else if (direct instanceof Player) {
             player = (Player) direct;
         }
-        // 初始化倍率，用于最终粒子效果显示
         double magnification = 1.0;
-
         if (player != null) {
-            // 获取初始伤害值
             double baseDamage = event.getNewDamage();
             double multiple = 0;
-            //熔火核心
             if (ModCurios.hasCurio(player, ModCurios.BLAZE_CORE.get())) {
                 if (event.getSource().is(DamageTypeTags.IS_FIRE)) {
                     if (TemperatureData.gettemperatures(player) < 50) {
@@ -156,6 +141,27 @@ public class PlayerDamageModifierEvent {
                     multiple += 0.1;
                 }
             }
+            //逢魔之刻
+            if (ModCurios.hasCurio(player, ModCurios.TWILIGHT_MOMENT.get())) {
+                if (event.getSource().is(DamageTypeTags.WITCH_RESISTANT_TO)) {
+                    multiple += 0.25;
+                    int effectLevel = 0;
+                    if(player.hasEffect(ModMobEffects.SPELL_SURGE)) {
+                        effectLevel = player.getEffect(ModMobEffects.SPELL_SURGE).getAmplifier()+1;
+                        if(effectLevel>=7){
+                            System.out.println("Level:"+effectLevel);
+                            player.removeEffect(ModMobEffects.SPELL_SURGE);
+                            triggerFireExplosion(player, event.getEntity());
+                        }
+                        else {
+                            player.addEffect(new MobEffectInstance(ModMobEffects.SPELL_SURGE,240,Math.min(7,effectLevel),true,true));
+                        }
+                    }else {
+                        player.addEffect(new MobEffectInstance(ModMobEffects.SPELL_SURGE,240, 0,true,true));
+                    }
+
+                }
+            }
             //黄巾
             if (ModCurios.hasCurio(player, ModCurios.YELLOW_HEADSCARF.get())) {
                 if (event.getSource().is(DamageTypeTags.IS_LIGHTNING)) {
@@ -188,8 +194,8 @@ public class PlayerDamageModifierEvent {
                 // 如果装备了“赌徒的胸花”，进行暴击加成浮动判定
                 if (ModCurios.hasCurio(player, ModCurios.GAMBLERS_CORSAGE.get())) {
                     int chips = ChipsData.getChips(player);
-                    double chance = chips < 2 ? 0.5 : 0.75;
-                    // 消耗筹码前先检查是否处于某特殊状态（防止多次扣除）
+                    double chance = chips < 2 ? 0.5 : 1;
+                    // 消耗筹码前先检查是否处于特殊状态（防止多次扣除）
                     if (chips >= 2 && !player.getPersistentData().getBoolean("gambler_5effect")) {
                         ChipsData.removeChip(player, 2);
                     }
@@ -202,12 +208,10 @@ public class PlayerDamageModifierEvent {
                 event.setNewDamage((float) (baseDamage * critMultiplier));
                 magnification = critMultiplier;
 
-                // TODO：这里可以添加暴击提示（粒子、音效等）
             } else {
                 // 没有暴击，仅使用增伤后数值
                 event.setNewDamage((float) baseDamage);
             }
-
             //银伤害对亡灵增伤50%
             if(event.getSource().is(TagKey.create(Registries.DAMAGE_TYPE,ResourceLocation.withDefaultNamespace("is_silver")))){
                 System.out.println("is Silver Damage");
@@ -219,18 +223,14 @@ public class PlayerDamageModifierEvent {
 
             if (LSPConfig.IS_DAMAGE_NUM.get())
             {
-                // 如果是服务端玩家，发送伤害粒子包用于客户端显示
                 if (player instanceof ServerPlayer serverPlayer) {
-                    // 获取目标位置
                     Vec3 pos = event.getEntity().position();
-                    // 根据伤害类型标签映射到对应的展示名称
                     String damageType = DAMAGE_TYPE_MAP.entrySet().stream()
                             .filter(entry -> event.getSource().is(entry.getKey()))
                             .map(Map.Entry::getValue)
                             .findFirst()
                             .orElse("attack");
                     String damagetype = getDamageTypeString(event.getSource());
-                    // 发送自定义粒子数据包
                     PacketDistributor.sendToPlayer(serverPlayer, new DamageParticlePacket(
                             damagetype,
                             event.getNewDamage(),
@@ -267,5 +267,25 @@ public class PlayerDamageModifierEvent {
                     return items;
                 })
                 .orElse(Collections.emptyList());
+    }
+
+    private static final float EXPLOSION_RADIUS_FIRE = 3.0F;
+    private static final float FIRE_DAMAGE_AMOUNT = 8.0F;
+    private static void triggerFireExplosion(Player player, LivingEntity target) {
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.EXPLOSION_EMITTER, target.getX(), target.getY() + target.getEyeHeight() / 2.0, target.getZ(),
+                    1, 0.0D, 0.0D, 0.0D, 0.0D);
+            serverLevel.sendParticles(ParticleTypes.FLAME, target.getX(), target.getY() + target.getEyeHeight() / 2.0, target.getZ(),
+                    50, EXPLOSION_RADIUS_FIRE / 2, EXPLOSION_RADIUS_FIRE / 2, EXPLOSION_RADIUS_FIRE / 2, 0.1D);
+            AABB explosionBounds = target.getBoundingBox().inflate(EXPLOSION_RADIUS_FIRE);
+            serverLevel.getEntitiesOfClass(LivingEntity.class, explosionBounds,
+                            e -> e != player)
+                    .forEach(entityInBlast -> {
+                        DamageSource fireSource = serverLevel.damageSources().source(ResourceKey.create(Registries.DAMAGE_TYPE,
+                                ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"pure_fire_damage")), player);
+                        entityInBlast.hurt(fireSource, FIRE_DAMAGE_AMOUNT);
+                        target.invulnerableTime=0;
+                    });
+        }
     }
 }

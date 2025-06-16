@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:diamond_shovel"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:gravedigger_shovel"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:iron_block"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

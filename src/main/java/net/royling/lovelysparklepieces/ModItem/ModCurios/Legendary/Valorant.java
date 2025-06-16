@@ -11,11 +11,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class Valorant extends UniversalCurio {
         super(properties.stacksTo(1).rarity(Rarity.EPIC));
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.level12").withColor(ColorUtil.getRainbow()));

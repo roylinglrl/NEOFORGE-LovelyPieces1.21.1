@@ -5,8 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerChip;
-import net.royling.lovelysparklepieces.ClientEvent.PlayerSoul;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.PlayerChip;
 
 public class ChipsData {
     public static int getChips(Player player){

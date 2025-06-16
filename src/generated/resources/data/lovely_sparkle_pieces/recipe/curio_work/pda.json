@@ -1,0 +1,36 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:global_positioning_system"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:pda"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:writable_book"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "minecraft:light_weighted_pressure_plate"
+    },
+    {
+      "item": "lovely_sparkle_pieces:superpolymerization"
+    }
+  ]
+}

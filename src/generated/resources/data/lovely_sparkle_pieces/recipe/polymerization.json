@@ -2,20 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
     "I": {
       "item": "minecraft:iron_ingot"
-    },
-    "L": {
-      "item": "minecraft:lapis_lazuli"
-    },
-    "R": {
-      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    "IRI",
-    "RLR",
-    "IRI"
+    "III",
+    "IEI",
+    "III"
   ],
   "result": {
     "count": 1,

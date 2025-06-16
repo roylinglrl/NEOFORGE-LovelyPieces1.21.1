@@ -1,0 +1,24 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "lovely_sparkle_pieces:moon_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:jumping_footwear"
+  },
+  "secondary": [
+    {
+      "item": "lovely_sparkle_pieces:goat_boot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:cat_boot"
+    },
+    {
+      "item": "lovely_sparkle_pieces:polymerization"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    }
+  ]
+}

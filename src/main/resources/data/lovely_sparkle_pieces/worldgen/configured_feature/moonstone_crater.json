@@ -1,0 +1,9 @@
+{
+  "type": "lovely_sparkle_pieces:moonstone_crater",
+  "config": {
+    "radius": 9 ,
+    "depth": 5,
+    "minStones": 14,
+    "maxStones": 22
+  }
+}

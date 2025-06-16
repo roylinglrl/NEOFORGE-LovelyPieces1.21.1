@@ -2,6 +2,7 @@
   "required": true,
   "package": "net.royling.lovelysparklepieces.mixin",
   "mixins": [
+    "CreeperAccessor",
     "CreeperMixin",
     "EnchantmentMenuMixin",
     "FishingHookMixin",
@@ -11,8 +12,6 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "client": [
-    "ItemInHandRendererMixin"
-  ],
+  "client": [],
   "server": []
 }

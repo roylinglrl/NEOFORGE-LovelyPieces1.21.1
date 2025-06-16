@@ -13,12 +13,11 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.royling.lovelysparklepieces.ClientEvent.ColorUtil;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.royling.lovelysparklepieces.ModEvents.ClientEvent.ColorUtil;
 
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class BlastAbsorber extends Block {
     public BlastAbsorber(Properties properties) {
@@ -36,7 +35,7 @@ public class BlastAbsorber extends Block {
                 box(4, 8, 4, 12, 16, 12));
     }
 
-    @Override
+    @Override @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.blast_absorber.des").withColor(ColorUtil.getRainbow()));
         tooltipComponents.add(Component.translatable("tooltip.lovely_sparkle_pieces.blast_absorber.des1").withColor(ColorUtil.getRainbow()));

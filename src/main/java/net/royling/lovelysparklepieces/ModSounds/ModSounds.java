@@ -15,6 +15,7 @@ public class ModSounds {
             DeferredRegister.create(Registries.SOUND_EVENT, MODID);
 
     public static final Supplier<SoundEvent> TREASURE_OPEN = registerSound("item.fishing_treasure.open");
+    public static final Supplier<SoundEvent> ELECTRIC = registerSound("item.electric.attack");
 
     private static Supplier<SoundEvent> registerSound(String name) {
         ResourceLocation location = ResourceLocation.fromNamespaceAndPath(MODID, name);

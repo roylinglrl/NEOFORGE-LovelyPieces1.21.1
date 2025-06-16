@@ -1,0 +1,27 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:powered_rail"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:power_amulet"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:lightning_rod"
+    },
+    {
+      "item": "minecraft:clock"
+    }
+  ]
+}

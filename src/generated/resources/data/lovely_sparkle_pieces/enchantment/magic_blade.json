@@ -1,0 +1,32 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.lovely_sparkle_pieces.magic_blade"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "lovely_sparkle_pieces:lightning_striker"
+        },
+        "enchanted": "attacker"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 29,
+    "per_level_above_first": 7
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 18,
+    "per_level_above_first": 7
+  },
+  "primary_items": "#minecraft:enchantable/sword",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/weapon",
+  "weight": 2
+}

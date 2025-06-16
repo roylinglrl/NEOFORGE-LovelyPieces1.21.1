@@ -1,0 +1,30 @@
+{
+  "type": "lovely_sparkle_pieces:curio_work",
+  "primary": {
+    "item": "minecraft:leather"
+  },
+  "result": {
+    "count": 1,
+    "id": "lovely_sparkle_pieces:amulet_pouch"
+  },
+  "secondary": [
+    {
+      "item": "minecraft:shulker_shell"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "lovely_sparkle_pieces:moon_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ]
+}
