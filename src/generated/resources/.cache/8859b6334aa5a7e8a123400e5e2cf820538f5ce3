@@ -1,0 +1,15 @@
+// 1.21.1	2025-06-13T06:50:50.6546626	Tags for minecraft:item mod id lovely_sparkle_pieces
+931840c66a63ce61d111c7f149daf56eff7f1e9d data/c/tags/item/enchantables.json
+0e1f662bac15e426b1b74ad0fbd68583c0e7616c data/minecraft/tags/item/axes.json
+c5089c3b4ed8091ab9871354eb29202592bd59f6 data/minecraft/tags/item/cluster_max_harvestables.json
+931840c66a63ce61d111c7f149daf56eff7f1e9d data/minecraft/tags/item/enchantable/durability.json
+eb93d7df363ed2e81203c8ab1d910d8a09808873 data/minecraft/tags/item/enchantable/fire_aspect.json
+aa4d6e274b2e9edbd2da9e8570d828b308571947 data/minecraft/tags/item/enchantable/mining.json
+eb93d7df363ed2e81203c8ab1d910d8a09808873 data/minecraft/tags/item/enchantable/sharp_weapon.json
+c5089c3b4ed8091ab9871354eb29202592bd59f6 data/minecraft/tags/item/enchantable/sword.json
+be17c51c1ec4081d6715658d4871644c6cec674c data/minecraft/tags/item/enchantable/vanishing.json
+eb93d7df363ed2e81203c8ab1d910d8a09808873 data/minecraft/tags/item/enchantable/weapon.json
+e1f18e924d33a6c7bb2ee0d221d17ce59ebbe3eb data/minecraft/tags/item/hoes.json
+2685d65f81465300acc217b9298fa47fa837facb data/minecraft/tags/item/pickaxes.json
+e013bca1361531b277b02b2b2bca38aac6fb9264 data/minecraft/tags/item/shovels.json
+c5089c3b4ed8091ab9871354eb29202592bd59f6 data/minecraft/tags/item/swords.json

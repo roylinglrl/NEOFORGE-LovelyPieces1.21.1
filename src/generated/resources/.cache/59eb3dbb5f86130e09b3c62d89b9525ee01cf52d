@@ -1,8 +1,12 @@
-// 1.21.1	2025-06-03T02:16:53.6604891	Loot Tables
+// 1.21.1	2025-06-09T10:32:34.5873656	Loot Tables
 6451a4fe2038cd48e1e4800b627e3a672062e7f7 data/lovely_sparkle_pieces/loot_table/blocks/blast_absorber.json
 9353b513f4ed8842173f99b0ae3aa24663fc0463 data/lovely_sparkle_pieces/loot_table/blocks/curio_workbench.json
 aa74786d773441f3ad8b316c32c474b8db4f0b5f data/lovely_sparkle_pieces/loot_table/blocks/flat_ice.json
+fd626a394e449a58a6eb1b6690b9a74456d88f08 data/lovely_sparkle_pieces/loot_table/blocks/labblock_baw_floor.json
+aed5142eed4be7a2d529e766352a538cb1eff152 data/lovely_sparkle_pieces/loot_table/blocks/labblock_rusty_plate.json
+1b9b5cf7f4a839690d2c2cc1c3b496df3991882f data/lovely_sparkle_pieces/loot_table/blocks/labblock_rusty_plate2.json
 accc856c751ccaab396997c5a98fed95cf464848 data/lovely_sparkle_pieces/loot_table/blocks/molten_dirt.json
 d6ddb6006503149a678b5ecc93132ea10aed5154 data/lovely_sparkle_pieces/loot_table/blocks/molten_stone.json
+bb12b72e6637085b793364503d7d57d474f483d7 data/lovely_sparkle_pieces/loot_table/blocks/moonstone.json
 64d66089f511ca076faad5afd791f8e79938022d data/lovely_sparkle_pieces/loot_table/blocks/solid_ice.json
 bba78ffdc95b11dafcef2022d8020f15c1865850 data/lovely_sparkle_pieces/loot_table/blocks/soul_light.json
