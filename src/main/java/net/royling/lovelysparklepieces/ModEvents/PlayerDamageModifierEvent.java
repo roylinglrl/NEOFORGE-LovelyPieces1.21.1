@@ -57,15 +57,31 @@ public class PlayerDamageModifierEvent {
     );
     private static final Map<TagKey<DamageType>, String> DAMAGE_TYPE_PRIORITY_MAP = new LinkedHashMap<>();
     static {
-        DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_FIRE, "fire");
-        DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.WITCH_RESISTANT_TO, "magic");
-        DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_PROJECTILE, "arrow");
+        DAMAGE_TYPE_PRIORITY_MAP
+                .put(
+                        DamageTypeTags
+                        .IS_FIRE,
+                        "fire"
+                )
+        ;
+        DAMAGE_TYPE_PRIORITY_MAP
+                .put(
+                        DamageTypeTags
+                        .WITCH_RESISTANT_TO,
+                        "magic"
+                )
+        ;
+        DAMAGE_TYPE_PRIORITY_MAP
+                .put(DamageTypeTags
+                        .IS_PROJECTILE,
+                        "arrow"
+                )
+        ;
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_FALL, "fall");
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_LIGHTNING, "thunder");
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_EXPLOSION, "explosion");
         DAMAGE_TYPE_PRIORITY_MAP.put(TagKey.create(Registries.DAMAGE_TYPE,ResourceLocation.withDefaultNamespace("is_silver")), "silver");
         DAMAGE_TYPE_PRIORITY_MAP.put(DamageTypeTags.IS_FREEZING, "frozen");
-        // ... 你可以根据需要添加更多标签和优先级
     }
     public static String getDamageTypeString(DamageSource damageType) {
         // 遍历优先级Map
@@ -243,6 +259,25 @@ public class PlayerDamageModifierEvent {
             }
         }
     }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onLivingHurtEnd(LivingDamageEvent.Post event){
+        Entity source = event.getSource().getEntity();
+        Entity direct = event.getSource().getDirectEntity();
+        Player player = null;
+        float damageCount = event.getNewDamage();
+        if (source instanceof Player) {
+            player = (Player) source;
+        }
+        if(player!= null){
+            AttributeInstance life_steal = player.getAttribute(ModAttribute.LIFE_STEAL);
+            if (life_steal != null) {
+                player.heal(damageCount * (float)life_steal.getValue());
+            }
+        }
+    }
+
+
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Pre event) {
         if(event.getEntity().level().isClientSide)return;

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
@@ -20,12 +21,19 @@ import net.royling.lovelysparklepieces.ModEnchantment.ModEnchantments;
 
 @EventBusSubscriber(modid = LovelySparklePieces.MODID)
 public class LightStrikerEvent {
-    @SubscribeEvent
+    // Apply the bonus before Magic Blade converts and cancels the original melee hit.
+    @SubscribeEvent(priority = EventPriority.LOW)
     public static void exThunderDamage(LivingIncomingDamageEvent event){
         if(event.getEntity().level().isClientSide)return;
-        if(event.getSource().getEntity() instanceof LivingEntity livingEntity){
+        DamageSource incomingSource = event.getSource();
+        // Restrict every attacker, including mobs, so generated damage cannot trigger itself.
+        if (!incomingSource.is(DamageTypes.PLAYER_ATTACK)
+                && !incomingSource.is(DamageTypes.MOB_ATTACK)
+                && !incomingSource.is(DamageTypes.MOB_ATTACK_NO_AGGRO)) return;
+        if(incomingSource.getEntity() instanceof LivingEntity livingEntity
+                && incomingSource.getDirectEntity() == livingEntity){
             if(livingEntity instanceof Player player) {
-                if (!event.getSource().is(DamageTypes.PLAYER_ATTACK)) return;
+                if (!incomingSource.is(DamageTypes.PLAYER_ATTACK)) return;
                 if (player.getAttackStrengthScale(0.5f) < 0.9f) return;
             }
             RegistryAccess registryAccess = event.getEntity().registryAccess();
@@ -37,6 +45,11 @@ public class LightStrikerEvent {
             DamageSource source = livingEntity.damageSources().source(ResourceKey.create(Registries.DAMAGE_TYPE,
                     ResourceLocation.fromNamespaceAndPath(LovelySparklePieces.MODID,"pure_lightning_damage")),livingEntity);
             event.getEntity().hurt(source,1+(count*0.75f));
+            // A lethal bonus already ran the death handlers; do not kill the same target again.
+            if (event.getEntity().isDeadOrDying() || event.getEntity().isRemoved()) {
+                event.setCanceled(true);
+                return;
+            }
             event.getEntity().invulnerableTime=0;
         }
     }

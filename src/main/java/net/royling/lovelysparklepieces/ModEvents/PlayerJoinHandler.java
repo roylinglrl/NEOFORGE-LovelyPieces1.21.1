@@ -29,14 +29,18 @@ public class PlayerJoinHandler {
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
         Player player = event.getEntity();
         if (!player.level().isClientSide) {
-            player.sendSystemMessage(Component.translatable("message.lsp.welcome").withStyle(ChatFormatting.GOLD));
-            player.sendSystemMessage(Component.translatable("message.lsp.welcome1").withStyle(ChatFormatting.GOLD));
-            player.sendSystemMessage(Component.translatable("message.lsp.welcome2").withStyle(ChatFormatting.GOLD));
-            player.sendSystemMessage(Component.translatable("message.lsp.welcome3").withStyle(ChatFormatting.GOLD));
+            if (LSPConfig.SHOW_WELCOME_MESSAGES.get()) {
+                player.sendSystemMessage(Component.translatable("message.lsp.welcome").withStyle(ChatFormatting.GOLD));
+                player.sendSystemMessage(Component.translatable("message.lsp.welcome1").withStyle(ChatFormatting.GOLD));
+                player.sendSystemMessage(Component.translatable("message.lsp.welcome2").withStyle(ChatFormatting.GOLD));
+                player.sendSystemMessage(Component.translatable("message.lsp.welcome3").withStyle(ChatFormatting.GOLD));
+            }
+
             PacketDistributor.sendToPlayer((ServerPlayer) player,new PlayerSoul(SoulData.getSouls(player)));
             PacketDistributor.sendToPlayer((ServerPlayer) player,new PlayerChip(ChipsData.getChips(player)));
             PacketDistributor.sendToPlayer((ServerPlayer) player,new PlayerTemperature(TemperatureData.gettemperatures(player)));
             PacketDistributor.sendToPlayer((ServerPlayer) player,new PlayerLavadef(player.getPersistentData().getInt("lsp_lava_def")));
+
             SoulButterflyEntity.resetCountForPlayer(player);
             if(LSPConfig.IS_START_ITEM.get()){
                 // 获取持久化NBT

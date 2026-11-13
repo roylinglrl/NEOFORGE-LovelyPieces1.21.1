@@ -11,7 +11,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
@@ -27,10 +29,11 @@ import net.royling.lovelysparklepieces.ModItem.ModCurios.UniversalCurio;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class BlasphemousContract extends UniversalCurio {
+public class BlasphemousContract extends Item implements ICurioItem {
     public BlasphemousContract(Properties properties) {
         super(properties.stacksTo(1).rarity(Rarity.EPIC));
     }
@@ -89,6 +92,7 @@ public class BlasphemousContract extends UniversalCurio {
         }
         return true;
     }
+
     @Override
     public @NotNull ICurio.DropRule getDropRule(SlotContext slotContext, DamageSource source, boolean recentlyHit, ItemStack stack) {
         return ICurio.DropRule.ALWAYS_KEEP;

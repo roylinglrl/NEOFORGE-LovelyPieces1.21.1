@@ -21,6 +21,8 @@ public class PlayerGetDamageEvent {
     public static void playerIncomingDamage(LivingIncomingDamageEvent event){
         if (!(event.getEntity() instanceof Player player)) return;
         if (player.level().isClientSide) return;
+
+
         Optional<ItemStack> boneArmorStack = CuriosApi.getCuriosInventory(player)
                 .flatMap(inv -> inv.findFirstCurio(ModCurios.BONE_ARMOR.get()))
                 .flatMap(result -> Optional.of(result.stack()));
@@ -36,6 +38,7 @@ public class PlayerGetDamageEvent {
             stack.set(ModDataComponents.BONE_ARMOR.get(),
                     new BoneArmorComponent(currentCharges - 1, component.chargeCount()));
             player.inventoryMenu.broadcastChanges();
+            player.invulnerableTime+=10;
             event.setCanceled(true);
         }
 

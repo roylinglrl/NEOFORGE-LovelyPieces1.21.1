@@ -1,6 +1,6 @@
 package net.royling.lovelysparklepieces.ModEntity.Abigail;
 
-import icyllis.modernui.annotation.Nullable;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.royling.lovelysparklepieces.ModEntity.Butterfly.SoulButterflyFollowOwnerGoal;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.UUID;
 

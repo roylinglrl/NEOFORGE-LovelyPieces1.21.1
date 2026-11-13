@@ -8,6 +8,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.behavior.warden.SonicBoom;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +22,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Enumeration;
 
 public class WildfirePortalBlock extends Block {
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 12, 16);

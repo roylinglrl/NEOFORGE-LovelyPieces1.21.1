@@ -1,6 +1,6 @@
 package net.royling.lovelysparklepieces.ModItem.ModUsingItem;
 
-import icyllis.modernui.annotation.Nullable;
+
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.royling.lovelysparklepieces.ModEntity.Abigail.AbigailEntity;
 import net.royling.lovelysparklepieces.ModEntity.ModEntities;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class AbigailsFlower extends Item {

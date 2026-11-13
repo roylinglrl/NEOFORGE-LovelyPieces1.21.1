@@ -19,4 +19,7 @@ public class ModAttribute {
     public static final Holder<Attribute> MAGIC_DAMAGE_MODIFIER = ATTRIBUTES.register("magic_damage_modifier",
             ()->new RangedAttribute("attribute.lsp.magic_damage_modifier",1d,0d,2147483648d).setSyncable(true));
 
+    public static final Holder<Attribute> LIFE_STEAL = ATTRIBUTES.register("life_steal",
+            ()->new RangedAttribute("attribute.lsp.life_steal",0,0,2147483647d).setSyncable(true));
+
 }

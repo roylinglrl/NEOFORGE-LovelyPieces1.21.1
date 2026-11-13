@@ -47,7 +47,7 @@ public class PuregoldRing {
      * 如果玩家佩戴了相应的戒指，则取消伤害。
      */
     @SubscribeEvent
-    public static void onPlayerGetAttacked(LivingIncomingDamageEvent event) {
+        public static void onPlayerGetAttacked(LivingIncomingDamageEvent event) {
         if (event.getEntity().level().isClientSide) return;
 
         // 检查受攻击者是否是玩家

@@ -7,6 +7,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
@@ -17,6 +19,10 @@ import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
 import net.royling.lovelysparklepieces.PlayerData.SoulData;
 import top.theillusivec4.curios.api.CuriosApi;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class BCEvents {
     public static boolean hasBlasphemousContract(Player player) {
         return CuriosApi.getCuriosInventory(player)
@@ -25,12 +31,36 @@ public class BCEvents {
     }
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
-        if (event.getEntity().level().isClientSide) return;
-        if (event.getSource().getEntity() instanceof Player player && hasBlasphemousContract(player)) {
-            for (ItemEntity drop : event.getDrops()) {
-                drop.getItem().setCount(drop.getItem().getCount() * 2);
+        // Player inventory drops belong to the death/grave handler, not the mob loot bonus.
+        if (event.getEntity().level().isClientSide || event.getEntity() instanceof Player) return;
+        if (!(event.getSource().getEntity() instanceof Player player) || !hasBlasphemousContract(player)) return;
+
+        List<ItemEntity> additionalDrops = new ArrayList<>();
+        for (ItemEntity drop : event.getDrops()) {
+            ItemStack original = drop.getItem();
+            if (original.isEmpty()) continue;
+
+            int maxStackSize = Math.max(1, Math.min(original.getMaxStackSize(), Item.ABSOLUTE_MAX_STACK_SIZE));
+            long remaining = (long) original.getCount() * 2;
+            int firstCount = (int) Math.min(remaining, maxStackSize);
+            // Other death handlers may hold this ItemStack; never grow their shared reference.
+            drop.setItem(original.copyWithCount(firstCount));
+            remaining -= firstCount;
+
+            while (remaining > 0) {
+                int count = (int) Math.min(remaining, maxStackSize);
+                ItemEntity extra = drop.copy();
+                UUID extraId = extra.getUUID();
+                // Preserve pickup rules, owner, motion and lifetime, but give every drop a new identity.
+                extra.restoreFrom(drop);
+                extra.setUUID(extraId);
+                extra.setItem(original.copyWithCount(count));
+                additionalDrops.add(extra);
+                remaining -= count;
             }
         }
+        // Keep all loot in the event so cancellation and other drop collectors still apply.
+        event.getDrops().addAll(additionalDrops);
     }
     @SubscribeEvent
     public static void onExperienceDrop(LivingExperienceDropEvent event) {

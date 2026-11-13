@@ -20,6 +20,7 @@ public class LSPConfig {
     public static final ModConfigSpec.BooleanValue IS_DAMAGE_NUM;
     public static final ModConfigSpec.BooleanValue IS_START_ITEM;
     public static final ModConfigSpec.BooleanValue IS_STRANGE_ITEM;
+    public static final ModConfigSpec.BooleanValue SHOW_WELCOME_MESSAGES;
     static{
         BUILDER.push("PiecesSettings");
         MAGNET_RADIUS = BUILDER
@@ -87,6 +88,10 @@ public class LSPConfig {
                 .comment("是否启用独特的道具？")
                 .comment("内存戒指 夜莺戒指 FPS之眼等")
                 .define("Boolean Strange Item",true);
+        SHOW_WELCOME_MESSAGES = BUILDER
+                .comment("Whether to show the welcome messages when a player enters a world.")
+                .comment("设置为 false 可关闭玩家进入世界时的欢迎提示。")
+                .define("showWelcomeMessages", true);
         SPEC=BUILDER.build();
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
@@ -20,12 +21,18 @@ import net.royling.lovelysparklepieces.ModEnchantment.ModEnchantments;
 
 @EventBusSubscriber(modid = LovelySparklePieces.MODID)
 public class MagicBladeEvent {
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void exThunderDamage(LivingIncomingDamageEvent event){
         if(event.getEntity().level().isClientSide)return;
-        if(event.getSource().getEntity() instanceof LivingEntity livingEntity){
+        DamageSource incomingSource = event.getSource();
+        // Only convert direct melee hits, never this enchantment's own magic damage.
+        if (!incomingSource.is(DamageTypes.PLAYER_ATTACK)
+                && !incomingSource.is(DamageTypes.MOB_ATTACK)
+                && !incomingSource.is(DamageTypes.MOB_ATTACK_NO_AGGRO)) return;
+        if(incomingSource.getEntity() instanceof LivingEntity livingEntity
+                && incomingSource.getDirectEntity() == livingEntity){
             if(livingEntity instanceof Player player) {
-                if (!event.getSource().is(DamageTypes.PLAYER_ATTACK)) return;
+                if (!incomingSource.is(DamageTypes.PLAYER_ATTACK)) return;
             }
             RegistryAccess registryAccess = event.getEntity().registryAccess();
             Registry<Enchantment> enchantmentRegistry = registryAccess.registryOrThrow(Registries.ENCHANTMENT);
@@ -34,8 +41,8 @@ public class MagicBladeEvent {
             int count = EnchantmentHelper.getEnchantmentLevel(magic,livingEntity);
             if(count<1)return;
             DamageSource source = livingEntity.damageSources().indirectMagic(livingEntity,livingEntity);
-            event.getEntity().hurt(source,event.getAmount());
             event.setCanceled(true);
+            event.getEntity().hurt(source,event.getAmount());
         }
     }
 }

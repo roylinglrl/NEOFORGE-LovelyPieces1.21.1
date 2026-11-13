@@ -99,7 +99,7 @@ dependencies {
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
-    implementation "curse.maven:selene-499980:6462396"
+    implementation "curse.maven:selene-499980:8682854"
     implementation "curse.maven:mmmmmmmmmmmm-225738:6237115"
     implementation "curse.maven:modern-ui-352491:6200236"
     implementation "curse.maven:inventory-hud-forge-357540:6369797"
@@ -111,9 +111,8 @@ dependencies {
     implementation "curse.maven:iceberg-520110:6423863"
     implementation "curse.maven:prism-lib-638111:6372979"
     implementation "curse.maven:journeymap-32274:6550378"
-
-
-    //implementation "curse.maven:lush-scented-paradise-1210484:6322326"
+    // Disabled: 1.2.2 registers a duplicate "teapot" value with NeoForge 21.1.248.
+    // implementation "curse.maven:lush-scented-paradise-1210484:6322326"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

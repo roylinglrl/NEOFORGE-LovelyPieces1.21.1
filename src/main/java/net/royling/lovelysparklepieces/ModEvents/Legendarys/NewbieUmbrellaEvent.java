@@ -1,14 +1,11 @@
 package net.royling.lovelysparklepieces.ModEvents.Legendarys;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
@@ -18,8 +15,8 @@ import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModConfigs.LSPConfig;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
+import top.theillusivec4.curios.api.event.DropRulesEvent;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.*;
 
@@ -27,75 +24,77 @@ import java.util.*;
 public class NewbieUmbrellaEvent {
     private static final Map<UUID, ItemListHolder> ITEM_CACHE = new HashMap<>();
 
-    @SubscribeEvent
-    public static void onPlayerDeath(LivingDeathEvent event){
-    if(event.getEntity() instanceof  Player player){
-        if(player.level().isClientSide)return;
-        if (!ModCurios.hasCurio(player, ModCurios.NEWBIE_UMBRELLA.get())) return;
-        ItemStack curioStack = CuriosApi.getCuriosInventory(player).flatMap(
-                    curiosInventory -> curiosInventory.findFirstCurio(ModCurios.NEWBIE_UMBRELLA.get())).get().stack();
-            curioStack.setDamageValue(curioStack.getDamageValue()+1);
-            if(curioStack.getDamageValue()>=curioStack.getMaxDamage()){
-                curioStack.shrink(1);
-            }
-            ItemListHolder cache = new ItemListHolder();
-            cache.mainInventory.addAll(player.getInventory().items);
-            cache.armorInventory.addAll(player.getInventory().armor);
-            cache.offhandInventory.addAll(player.getInventory().offhand);
-            CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
-                handler.getCurios().forEach((id, slot) -> {
-                    List<ItemStack> slotItems = new ArrayList<>();
-                    for (int i = 0; i < slot.getSlots(); i++) {
-                        slotItems.add(slot.getStacks().getStackInSlot(i));
-                }
-                    cache.curiosSlots.put(id, slotItems);
-                });
-            });
-            ITEM_CACHE.put(player.getUUID(),cache);
-        sendInsultMessage((ServerPlayer) player);
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public static void onPlayerDeath(LivingDeathEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+
+        // A canceled earlier death must never restore its snapshot after a later death.
+        ITEM_CACHE.remove(player.getUUID());
+        if (event.isCanceled()) return;
+
+        CuriosApi.getCuriosInventory(player)
+                .flatMap(handler -> handler.findFirstCurio(ModCurios.NEWBIE_UMBRELLA.get()))
+                .ifPresent(curio -> ITEM_CACHE.put(player.getUUID(), new ItemListHolder(player, curio.stack())));
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onCurioDropRules(DropRulesEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player && ITEM_CACHE.containsKey(player.getUUID())) {
+            // Curios owns the clone of equipment, cosmetic slots and slot modifiers.
+            event.addOverride(stack -> true, ICurio.DropRule.ALWAYS_KEEP);
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onPlayerDrops(LivingDropsEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            if (ITEM_CACHE.containsKey(player.getUUID())) {
-                event.getDrops().clear();
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        ItemListHolder cache = ITEM_CACHE.get(player.getUUID());
+        if (cache == null) return;
+
+        // Commit only once actual drops begin, after Curios has applied the keep rule.
+        if (!cache.protectionApplied) {
+            cache.protectionApplied = true;
+            ItemStack umbrella = cache.umbrella;
+            umbrella.setDamageValue(umbrella.getDamageValue() + 1);
+            if (umbrella.getDamageValue() >= umbrella.getMaxDamage()) {
+                umbrella.shrink(1);
             }
+            sendInsultMessage(player);
         }
+        event.getDrops().clear();
+        event.setCanceled(true);
     }
+
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        Player player = event.getEntity();
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
         ItemListHolder cache = ITEM_CACHE.remove(player.getUUID());
-        if (cache != null) {
-            for (int i = 0; i < cache.mainInventory.size(); i++) {
-                player.getInventory().items.set(i, cache.mainInventory.get(i));
-            }
-            for (int i = 0; i < cache.armorInventory.size(); i++) {
-                player.getInventory().armor.set(i, cache.armorInventory.get(i));
-            }
-            for (int i = 0; i < cache.offhandInventory.size(); i++) {
-                player.getInventory().offhand.set(i, cache.offhandInventory.get(i));
-            }
-            CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
-                cache.curiosSlots.forEach((slotId, items) -> {
-                    ICurioStacksHandler slot = handler.getCurios().get(slotId);
-                    if (slot != null) {
-                        for (int i = 0; i < items.size(); i++) {
-                            slot.getStacks().setStackInSlot(i, items.get(i));
-                        }
-                    }
-                });
-            });
+        if (cache == null || !cache.protectionApplied || event.isEndConquered()) return;
+
+        restoreInventory(player.getInventory().items, cache.mainInventory);
+        restoreInventory(player.getInventory().armor, cache.armorInventory);
+        restoreInventory(player.getInventory().offhand, cache.offhandInventory);
+    }
+
+    private static void restoreInventory(List<ItemStack> target, List<ItemStack> snapshot) {
+        for (int i = 0; i < snapshot.size(); i++) {
+            target.set(i, snapshot.get(i).copy());
         }
     }
 
     private static class ItemListHolder {
-        List<ItemStack> mainInventory = new ArrayList<>();
-        List<ItemStack> armorInventory = new ArrayList<>();
-        List<ItemStack> offhandInventory = new ArrayList<>();
-        Map<String, List<ItemStack>> curiosSlots = new HashMap<>();
+        final List<ItemStack> mainInventory;
+        final List<ItemStack> armorInventory;
+        final List<ItemStack> offhandInventory;
+        final ItemStack umbrella;
+        boolean protectionApplied;
+
+        ItemListHolder(ServerPlayer player, ItemStack umbrella) {
+            this.mainInventory = player.getInventory().items.stream().map(ItemStack::copy).toList();
+            this.armorInventory = player.getInventory().armor.stream().map(ItemStack::copy).toList();
+            this.offhandInventory = player.getInventory().offhand.stream().map(ItemStack::copy).toList();
+            this.umbrella = umbrella;
+        }
     }
 
     private static void sendInsultMessage(ServerPlayer player) {

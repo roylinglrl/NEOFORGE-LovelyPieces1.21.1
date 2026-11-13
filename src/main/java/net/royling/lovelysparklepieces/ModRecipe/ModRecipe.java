@@ -16,7 +16,7 @@ public class ModRecipe {
             DeferredRegister.create(Registries.RECIPE_TYPE, LovelySparklePieces.MODID);
 
     public static final Supplier<RecipeType<CurioWorkRecipe>> CURIO_WORK=
-            RECIPE_TYPES.register("curio_work",()->RecipeType.register("curio_work"));
+            RECIPE_TYPES.register("curio_work", () -> RecipeType.simple(LovelySparklePieces.resLoc("curio_work")));
 
     public static List<RecipeHolder<CurioWorkRecipe>> getRecipes(RecipeManager recipeManager) {
         return recipeManager.getAllRecipesFor(CURIO_WORK.get());

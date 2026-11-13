@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, LovelySparklePieces.MODID);
 
-    public static final Supplier<EntityType<SoulButterflyEntity>> BUTTERFLY =
-            ENTITIES.register("butterfly", () -> EntityType.Builder.of(SoulButterflyEntity::new, MobCategory.CREATURE)
+    public static final Supplier<EntityType<SoulButterflyEntity>> BUTTERFLY = ENTITIES.register("butterfly",
+            () -> EntityType.Builder.of(SoulButterflyEntity::new, MobCategory.CREATURE)
                     .sized(0.5F, 0.5F) // 大小可以调整
                     .clientTrackingRange(8)
                     .build("butterfly"));
@@ -27,8 +27,8 @@ public class ModEntities {
                     .updateInterval(2)
                     .build("bullet"));
 
-    public static final Supplier<EntityType<AbigailEntity>> ABIGAIL =
-            ENTITIES.register("abigail", () -> EntityType.Builder.of(AbigailEntity::new, MobCategory.CREATURE)
+    public static final Supplier<EntityType<AbigailEntity>> ABIGAIL = ENTITIES.register("abigail",
+            () -> EntityType.Builder.of(AbigailEntity::new, MobCategory.CREATURE)
                     .sized(0.8F, 1.3F)
                     .clientTrackingRange(8)
                     .build("bullet"));

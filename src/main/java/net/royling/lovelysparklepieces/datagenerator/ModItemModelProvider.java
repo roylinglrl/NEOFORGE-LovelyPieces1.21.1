@@ -1,7 +1,11 @@
 package net.royling.lovelysparklepieces.datagenerator;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.royling.lovelysparklepieces.LovelySparklePieces;
 import net.royling.lovelysparklepieces.ModItem.ModCurios.ModCurios;
@@ -10,6 +14,13 @@ import net.royling.lovelysparklepieces.ModItem.ModUsingItem.ModItems;
 public class ModItemModelProvider extends ItemModelProvider{
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, LovelySparklePieces.MODID, existingFileHelper);
+    }
+
+    private void handheldModel(Item item) {
+        ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+        getBuilder(id.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "item/" + id.getPath()));
     }
 
     @Override
@@ -105,21 +116,21 @@ public class ModItemModelProvider extends ItemModelProvider{
         basicItem(ModCurios.MOONLIGHT_BRACELET.get());
         basicItem(ModCurios.VERSATILE_PERSON.get());
         //
-        handheldItem(ModItems.SOUL_TORCH.get());
-        handheldItem(ModItems.NECROPSYCHE_PAPILLON.get());
+        handheldModel(ModItems.SOUL_TORCH.get());
+        handheldModel(ModItems.NECROPSYCHE_PAPILLON.get());
         basicItem(ModItems.DOMAIN_STONE.get());
-        handheldItem(ModItems.FIREBALL_STAFF.get());
-        handheldItem(ModItems.POLYMERIZATION.get());
-        handheldItem(ModItems.SUPERPOLYMERIZATION.get());
+        handheldModel(ModItems.FIREBALL_STAFF.get());
+        handheldModel(ModItems.POLYMERIZATION.get());
+        handheldModel(ModItems.SUPERPOLYMERIZATION.get());
         basicItem(ModItems.FISHING_TREASURE.get());
-        handheldItem(ModItems.PIRATE_SCIMITAR.get());
-        handheldItem(ModItems.FISH_HOE.get());
-        handheldItem(ModItems.FISH_AXE.get());
-        handheldItem(ModItems.FISH_PICKAXE.get());
-        handheldItem(ModItems.FISH_SHOVEL.get());
-        handheldItem(ModItems.HELL_FIRE.get());
-        handheldItem(ModItems.LUCY_AXE.get());
-        handheldItem(ModItems.GRAVEDIGGER.get());
+        handheldModel(ModItems.PIRATE_SCIMITAR.get());
+        handheldModel(ModItems.FISH_HOE.get());
+        handheldModel(ModItems.FISH_AXE.get());
+        handheldModel(ModItems.FISH_PICKAXE.get());
+        handheldModel(ModItems.FISH_SHOVEL.get());
+        handheldModel(ModItems.HELL_FIRE.get());
+        handheldModel(ModItems.LUCY_AXE.get());
+        handheldModel(ModItems.GRAVEDIGGER.get());
         basicItem(ModItems.MOJA_COLA.get());
         basicItem(ModItems.FLINTLOCK_BULLET.get());
         basicItem(ModItems.BATTERY.get());
